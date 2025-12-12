@@ -1,1 +1,169 @@
+/* =========
+   Theme: Minimal + Engineering + Subtle Motion
+   Only touches visuals. Keeps your existing layout intact.
+========= */
 
+:root{
+  --bg: #f7f8fb;
+  --text: #0b1220;
+  --muted: #52607a;
+
+  --brand1: #0b3b3f;  /* deep teal */
+  --brand2: #0b6f73;  /* teal */
+
+  --card: rgba(255,255,255,0.78);
+  --border: rgba(15, 23, 42, 0.10);
+  --shadow: 0 14px 40px rgba(2, 6, 23, 0.12);
+
+  --radius: 18px;
+
+  /* motion */
+  --ease: cubic-bezier(.2,.8,.2,1);
+  --dur: 280ms;
+}
+
+/* Sleek base */
+body{
+  background: var(--bg);
+  color: var(--text);
+}
+
+/* Make the whole site feel “cleaner” */
+a{ text-decoration: none; }
+.lead, .desc{ color: var(--muted); }
+
+/* Subtle engineering grid on the hero */
+.hero{
+  position: relative;
+  overflow: hidden;
+  background:
+    radial-gradient(900px 520px at 18% 18%, rgba(255,255,255,0.16), rgba(255,255,255,0) 55%),
+    linear-gradient(135deg, var(--brand1), var(--brand2));
+}
+.hero::before{
+  content:"";
+  position:absolute;
+  inset:-2px;
+  opacity: 0.14;
+  background:
+    linear-gradient(to right, rgba(255,255,255,0.18) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255,255,255,0.18) 1px, transparent 1px);
+  background-size: 34px 34px;
+  mask-image: radial-gradient(circle at 20% 30%, rgba(0,0,0,1), rgba(0,0,0,0) 65%);
+  pointer-events:none;
+}
+.hero::after{
+  /* soft “glow blob” */
+  content:"";
+  position:absolute;
+  width: 520px;
+  height: 520px;
+  right: -180px;
+  top: -220px;
+  background: radial-gradient(circle at 30% 30%, rgba(34,211,238,0.35), rgba(34,211,238,0) 60%);
+  filter: blur(6px);
+  opacity: 0.9;
+  pointer-events:none;
+  animation: floatGlow 7s var(--ease) infinite alternate;
+}
+
+@keyframes floatGlow{
+  from{ transform: translate(0,0) scale(1); }
+  to{ transform: translate(-20px, 18px) scale(1.05); }
+}
+
+/* Nav: glassy minimal */
+.topbar{
+  background: rgba(255,255,255,0.85);
+  backdrop-filter: blur(12px);
+}
+.navlinks a{
+  opacity: 0.85;
+  transition: opacity var(--dur) var(--ease);
+}
+.navlinks a:hover{ opacity: 1; }
+
+/* Hero image placeholder: looks more “designed” */
+.heroCard{
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.16);
+}
+.heroImg{
+  border: 1px solid rgba(255,255,255,0.16);
+  background:
+    radial-gradient(700px 260px at 20% 50%, rgba(34,211,238,0.25), rgba(34,211,238,0) 60%),
+    linear-gradient(135deg, rgba(255,255,255,0.14), rgba(255,255,255,0.03)),
+    repeating-linear-gradient(45deg, rgba(255,255,255,0.06) 0 12px, rgba(255,255,255,0.02) 12px 24px);
+}
+
+/* Buttons: crisp */
+.btn{
+  transition: transform var(--dur) var(--ease), box-shadow var(--dur) var(--ease), background var(--dur) var(--ease);
+}
+.btnPrimary{
+  background: rgba(255,255,255,0.96);
+  color: var(--brand1);
+  box-shadow: 0 10px 24px rgba(2,6,23,0.18);
+}
+.btnPrimary:hover{ transform: translateY(-1px); }
+.btnGhost{
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.26);
+}
+.btnGhost:hover{ background: rgba(255,255,255,0.10); transform: translateY(-1px); }
+
+/* Pills: slightly more minimal */
+.pill{
+  background: rgba(255,255,255,0.09);
+  border: 1px solid rgba(255,255,255,0.14);
+}
+
+/* Cards: glassy + hover motion */
+.card{
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  backdrop-filter: blur(10px);
+  transition: transform var(--dur) var(--ease), box-shadow var(--dur) var(--ease);
+}
+.card:hover{
+  transform: translateY(-6px);
+  box-shadow: var(--shadow);
+}
+
+/* Card thumb: more “tech” */
+.thumb{
+  background:
+    radial-gradient(650px 220px at 15% 50%, rgba(34,211,238,0.26), rgba(34,211,238,0) 55%),
+    linear-gradient(135deg, rgba(15,23,42,0.06), rgba(15,23,42,0.02));
+}
+
+/* Badges: clean chips */
+.badge{
+  border-radius: 999px;
+  padding: 6px 10px;
+  border: 1px solid rgba(15,23,42,0.10);
+  background: rgba(255,255,255,0.55);
+}
+
+/* Subtle page-load animation */
+@media (prefers-reduced-motion: no-preference){
+  .heroGrid > div{
+    animation: fadeUp 520ms var(--ease) both;
+  }
+  .heroCard{
+    animation: fadeUp 700ms var(--ease) both;
+    animation-delay: 80ms;
+  }
+  .grid .card{
+    animation: fadeUp 520ms var(--ease) both;
+  }
+  .grid .card:nth-child(2){ animation-delay: 60ms; }
+  .grid .card:nth-child(3){ animation-delay: 120ms; }
+  .grid .card:nth-child(4){ animation-delay: 180ms; }
+}
+
+@keyframes fadeUp{
+  from{ opacity: 0; transform: translateY(12px); }
+  to{ opacity: 1; transform: translateY(0); }
+}
