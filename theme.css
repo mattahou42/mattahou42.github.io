@@ -1,212 +1,276 @@
-/* =========
-   Theme: Sleek + Blueprint-Tech (≈40%) + Subtle Motion
-   Safe: only visuals, keeps your layout intact
-========= */
+/* =========================================================
+   GLOBAL THEME — Sleek / Minimal + Engineering / Blueprint
+   Safe to paste as a full replacement for theme.css
+   ========================================================= */
 
 :root{
+  /* Base colors */
   --bg: #f6f8fc;
   --text: #071225;
   --muted: #4b5b76;
 
-  /* Blueprint palette */
+  /* Engineering palette */
   --brand1: #071a3a;   /* deep navy */
   --brand2: #0b4ea2;   /* blueprint blue */
-  --accent: #22d3ee;   /* cyan highlight */
+  --accent: #22d3ee;   /* cyan accent */
 
-  --card: rgba(255,255,255,0.78);
-  --border: rgba(7, 18, 37, 0.12);
-  --shadow: 0 18px 50px rgba(2, 6, 23, 0.14);
+  /* Surfaces */
+  --card: rgba(255,255,255,0.75);
+  --border: rgba(7,18,37,0.12);
+  --shadow-sm: 0 6px 18px rgba(2,6,23,0.08);
+  --shadow-lg: 0 18px 50px rgba(2,6,23,0.14);
+
   --radius: 18px;
 
+  /* Motion */
   --ease: cubic-bezier(.2,.8,.2,1);
-  --dur: 280ms;
-
-  /* “grid density” knob */
-  --grid: 32px;
+  --dur: 260ms;
 }
 
-/* Base */
-body{ background: var(--bg); color: var(--text); }
-.lead, .desc{ color: var(--muted); }
+/* =========================================================
+   BASE / TYPOGRAPHY
+   ========================================================= */
 
-/* Nav: crisp, technical */
+html, body{
+  background: var(--bg);
+  color: var(--text);
+  letter-spacing: -0.01em;
+}
+
+h1, h2, h3{
+  letter-spacing: -0.02em;
+}
+
+p{
+  line-height: 1.65;
+}
+
+.lead, .desc{
+  color: var(--muted);
+}
+
+.container{
+  max-width: 1120px;
+}
+
+/* =========================================================
+   NAVIGATION (clean + technical)
+   ========================================================= */
+
 .topbar{
-  background: rgba(255,255,255,0.86);
+  background: rgba(255,255,255,0.88);
   backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
 }
+
 .navlinks a{
+  position: relative;
   opacity: 0.85;
   transition: opacity var(--dur) var(--ease);
 }
-.navlinks a:hover{ opacity: 1; }
 
-/* HERO: blueprint grid + CAD overlays */
-.hero{
+.navlinks a:hover{
+  opacity: 1;
+}
+
+/* cyan technical underline */
+.navlinks a::after{
+  content:"";
+  position:absolute;
+  left:0;
+  right:0;
+  bottom:-10px;
+  height:2px;
+  background: rgba(34,211,238,0.7);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform var(--dur) var(--ease);
+}
+
+.navlinks a:hover::after{
+  transform: scaleX(1);
+}
+
+/* =========================================================
+   SECTIONS — subtle engineering texture everywhere
+   ========================================================= */
+
+.section{
   position: relative;
-  overflow: hidden;
-  background:
-    radial-gradient(1000px 560px at 18% 18%, rgba(255,255,255,0.16), rgba(255,255,255,0) 55%),
-    linear-gradient(135deg, var(--brand1), var(--brand2));
 }
 
-/* Major grid */
-.hero::before{
+.section::before{
   content:"";
   position:absolute;
-  inset:-2px;
-  opacity: 0.18;
+  inset:0;
+  pointer-events:none;
+  opacity: 0.035;
   background:
-    linear-gradient(to right, rgba(255,255,255,0.22) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255,255,255,0.22) 1px, transparent 1px);
-  background-size: var(--grid) var(--grid);
-  mask-image: radial-gradient(circle at 18% 28%, rgba(0,0,0,1), rgba(0,0,0,0) 70%);
+    linear-gradient(to right, rgba(7,18,37,1) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(7,18,37,1) 1px, transparent 1px);
+  background-size: 64px 64px;
+}
+
+/* =========================================================
+   HERO (image-safe: works even with image on top)
+   ========================================================= */
+
+.hero{
+  background: linear-gradient(135deg, var(--brand1), var(--brand2));
+}
+
+/* blueprint frame corners */
+.hero .container{
+  position: relative;
+}
+
+.hero .container::before,
+.hero .container::after{
+  content:"";
+  position:absolute;
+  width: 120px;
+  height: 120px;
+  border-color: rgba(34,211,238,0.45);
   pointer-events:none;
 }
 
-/* Minor grid (finer, more “blueprint”) */
-.hero::after{
-  content:"";
-  position:absolute;
-  inset:-2px;
-  opacity: 0.10;
-  background:
-    linear-gradient(to right, rgba(255,255,255,0.18) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255,255,255,0.18) 1px, transparent 1px);
-  background-size: calc(var(--grid)/2) calc(var(--grid)/2);
-  mask-image: radial-gradient(circle at 22% 30%, rgba(0,0,0,1), rgba(0,0,0,0) 78%);
-  pointer-events:none;
+.hero .container::before{
+  top: 10px;
+  left: 10px;
+  border-top: 2px solid;
+  border-left: 2px solid;
 }
 
-/* Floating “cyan CAD glow” */
-.heroCard{
-  background: rgba(255,255,255,0.06);
-  border: 1px solid rgba(255,255,255,0.18);
-  box-shadow: 0 18px 60px rgba(2, 6, 23, 0.28);
-}
-.heroImg{
-  border: 1px solid rgba(255,255,255,0.16);
-  background:
-    radial-gradient(700px 280px at 25% 55%, rgba(34,211,238,0.28), rgba(34,211,238,0) 62%),
-    linear-gradient(135deg, rgba(255,255,255,0.10), rgba(255,255,255,0.03)),
-    repeating-linear-gradient(45deg, rgba(255,255,255,0.06) 0 12px, rgba(255,255,255,0.02) 12px 24px);
+.hero .container::after{
+  bottom: 10px;
+  right: 10px;
+  border-bottom: 2px solid;
+  border-right: 2px solid;
 }
 
-/* Buttons: still minimal, slightly “instrument panel” */
+/* =========================================================
+   BUTTONS — product / instrument panel feel
+   ========================================================= */
+
 .btn{
-  transition: transform var(--dur) var(--ease), box-shadow var(--dur) var(--ease), background var(--dur) var(--ease);
+  border-radius: 14px;
+  transition:
+    transform var(--dur) var(--ease),
+    box-shadow var(--dur) var(--ease),
+    background var(--dur) var(--ease);
 }
+
 .btnPrimary{
   background: rgba(255,255,255,0.95);
   color: var(--brand1);
-  box-shadow: 0 10px 26px rgba(2,6,23,0.18);
+  box-shadow: var(--shadow-sm);
 }
-.btnPrimary:hover{ transform: translateY(-1px); }
+
+.btnPrimary:hover{
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-lg);
+}
+
 .btnGhost{
-  background: rgba(255,255,255,0.05);
-  border: 1px solid rgba(255,255,255,0.26);
-}
-.btnGhost:hover{ background: rgba(255,255,255,0.10); transform: translateY(-1px); }
-
-/* Pills: tech chips */
-.pill{
-  background: rgba(255,255,255,0.08);
-  border: 1px solid rgba(255,255,255,0.14);
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.28);
 }
 
-/* Cards: glass + subtle “blueprint edge” */
+.btnGhost:hover{
+  background: rgba(255,255,255,0.12);
+  transform: translateY(-1px);
+}
+
+/* =========================================================
+   CARDS — premium tech surfaces
+   ========================================================= */
+
 .card{
   background: var(--card);
   border: 1px solid var(--border);
   border-radius: var(--radius);
   backdrop-filter: blur(10px);
-  transition: transform var(--dur) var(--ease), box-shadow var(--dur) var(--ease);
+  box-shadow: var(--shadow-sm);
   position: relative;
   overflow: hidden;
+  transition:
+    transform var(--dur) var(--ease),
+    box-shadow var(--dur) var(--ease);
 }
 
-/* Blueprint edge line */
+/* blueprint accent sweep */
 .card::before{
   content:"";
   position:absolute;
   inset:0;
-  pointer-events:none;
-  opacity: 0.0;
+  opacity: 0;
   background:
-    linear-gradient(90deg, rgba(34,211,238,0.45), rgba(34,211,238,0) 55%);
+    linear-gradient(90deg,
+      rgba(34,211,238,0.45),
+      rgba(34,211,238,0) 60%);
   transition: opacity var(--dur) var(--ease);
+  pointer-events:none;
 }
+
 .card:hover{
   transform: translateY(-6px);
-  box-shadow: var(--shadow);
+  box-shadow: var(--shadow-lg);
 }
-.card:hover::before{ opacity: 0.22; }
 
-/* Thumbnails: CAD-ish */
+.card:hover::before{
+  opacity: 0.22;
+}
+
+/* thumbnails feel technical even without images */
 .thumb{
   background:
     radial-gradient(650px 220px at 15% 50%, rgba(34,211,238,0.28), rgba(34,211,238,0) 55%),
     linear-gradient(135deg, rgba(7,18,37,0.06), rgba(7,18,37,0.02));
 }
 
-/* Badges: blueprint chips */
+/* =========================================================
+   BADGES / PILLS
+   ========================================================= */
+
 .badge{
   border-radius: 999px;
   padding: 6px 10px;
+  font-weight: 700;
   border: 1px solid rgba(7,18,37,0.12);
-  background: rgba(255,255,255,0.58);
+  background: rgba(255,255,255,0.6);
 }
-.badge.blue{ color: #0b4ea2; }
-.badge.green{ color: #14532d; }
-.badge.red{ color: #7f1d1d; }
 
-/* Subtle page-load animation */
+.pill{
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.14);
+}
+
+/* =========================================================
+   GLOBAL MOTION (subtle, professional)
+   ========================================================= */
+
 @media (prefers-reduced-motion: no-preference){
-  .heroGrid > div{ animation: fadeUp 520ms var(--ease) both; }
-  .heroCard{ animation: fadeUp 720ms var(--ease) both; animation-delay: 80ms; }
-  .grid .card{ animation: fadeUp 520ms var(--ease) both; }
+  .heroGrid > div,
+  .heroCard,
+  .section h2,
+  .section .lead,
+  .grid .card{
+    animation: fadeUp 520ms var(--ease) both;
+  }
+
   .grid .card:nth-child(2){ animation-delay: 60ms; }
   .grid .card:nth-child(3){ animation-delay: 120ms; }
   .grid .card:nth-child(4){ animation-delay: 180ms; }
 }
 
 @keyframes fadeUp{
-  from{ opacity: 0; transform: translateY(12px); }
-  to{ opacity: 1; transform: translateY(0); }
-}
-/* More obvious blueprint frame + corner ticks */
-.hero{
-  outline: 1px solid rgba(255,255,255,0.14);
-  outline-offset: -12px;
-}
-
-.hero .container{
-  position: relative;
+  from{
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to{
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-.hero .container::before{
-  content:"";
-  position:absolute;
-  left: 10px;
-  top: 10px;
-  width: 120px;
-  height: 120px;
-  border-left: 2px solid rgba(34,211,238,0.45);
-  border-top: 2px solid rgba(34,211,238,0.45);
-  border-radius: 14px 0 0 0;
-  pointer-events:none;
-  opacity: 0.7;
-}
-
-.hero .container::after{
-  content:"";
-  position:absolute;
-  right: 10px;
-  bottom: 10px;
-  width: 120px;
-  height: 120px;
-  border-right: 2px solid rgba(34,211,238,0.45);
-  border-bottom: 2px solid rgba(34,211,238,0.45);
-  border-radius: 0 0 14px 0;
-  pointer-events:none;
-  opacity: 0.7;
-}
