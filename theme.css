@@ -1,79 +1,133 @@
 /* =========================================================
-   GLOBAL THEME — Sleek / Minimal + Engineering / Blueprint
-   Safe to paste as a full replacement for theme.css
+   THEME.CSS — "Blueprint Minimal Pro" (significant redesign)
+   Safe: does NOT break your layout classes in styles.css
    ========================================================= */
 
+/* --------- Core Tokens --------- */
 :root{
-  /* Base colors */
-  --bg: #f6f8fc;
+  /* Light mode */
+  --bg0: #f4f7fb;
+  --bg1: #eef3fb;
   --text: #071225;
-  --muted: #4b5b76;
+  --muted: #4c5d78;
 
-  /* Engineering palette */
-  --brand1: #071a3a;   /* deep navy */
-  --brand2: #0b4ea2;   /* blueprint blue */
-  --accent: #22d3ee;   /* cyan accent */
+  --brandA: #061a3a;        /* navy */
+  --brandB: #0b4ea2;        /* blueprint blue */
+  --accent: #22d3ee;        /* cyan */
+  --accent2: #a78bfa;       /* violet highlight */
 
-  /* Surfaces */
-  --card: rgba(255,255,255,0.75);
+  --card: rgba(255,255,255,0.78);
+  --card2: rgba(255,255,255,0.62);
   --border: rgba(7,18,37,0.12);
-  --shadow-sm: 0 6px 18px rgba(2,6,23,0.08);
-  --shadow-lg: 0 18px 50px rgba(2,6,23,0.14);
+
+  --shadow-sm: 0 10px 26px rgba(2,6,23,0.08);
+  --shadow-md: 0 18px 55px rgba(2,6,23,0.12);
+  --shadow-lg: 0 26px 85px rgba(2,6,23,0.16);
 
   --radius: 18px;
+  --radius-lg: 26px;
 
-  /* Motion */
   --ease: cubic-bezier(.2,.8,.2,1);
   --dur: 260ms;
+
+  /* Blueprint grid density */
+  --grid: 56px;
+  --gridFine: 28px;
 }
 
-/* =========================================================
-   BASE / TYPOGRAPHY
-   ========================================================= */
+/* --------- Automatic Dark Mode --------- */
+@media (prefers-color-scheme: dark){
+  :root{
+    --bg0: #050b16;
+    --bg1: #071128;
+    --text: #e7efff;
+    --muted: rgba(231,239,255,0.72);
 
-html, body{
-  background: var(--bg);
+    --brandA: #071a3a;
+    --brandB: #0a3f88;
+
+    --card: rgba(255,255,255,0.06);
+    --card2: rgba(255,255,255,0.035);
+    --border: rgba(231,239,255,0.14);
+
+    --shadow-sm: 0 10px 26px rgba(0,0,0,0.32);
+    --shadow-md: 0 18px 55px rgba(0,0,0,0.40);
+    --shadow-lg: 0 26px 85px rgba(0,0,0,0.48);
+  }
+}
+
+/* --------- Base / Global Feel --------- */
+html{ scroll-behavior: smooth; }
+
+body{
+  background:
+    radial-gradient(1200px 600px at 15% 10%, rgba(34,211,238,0.10), transparent 60%),
+    radial-gradient(900px 520px at 85% 18%, rgba(167,139,250,0.08), transparent 55%),
+    linear-gradient(180deg, var(--bg0), var(--bg1));
   color: var(--text);
   letter-spacing: -0.01em;
 }
 
-h1, h2, h3{
+::selection{
+  background: rgba(34,211,238,0.28);
+}
+
+/* Optional: subtle scrollbar polish (Chrome/Edge) */
+*::-webkit-scrollbar{ width: 12px; height: 12px; }
+*::-webkit-scrollbar-thumb{
+  background: linear-gradient(180deg, rgba(34,211,238,0.35), rgba(167,139,250,0.28));
+  border: 3px solid rgba(0,0,0,0);
+  background-clip: padding-box;
+  border-radius: 999px;
+}
+*::-webkit-scrollbar-track{ background: rgba(2,6,23,0.06); }
+
+h1,h2,h3{
   letter-spacing: -0.02em;
 }
+p{ line-height: 1.65; }
+.lead, .desc{ color: var(--muted); }
 
-p{
-  line-height: 1.65;
-}
-
-.lead, .desc{
-  color: var(--muted);
-}
-
+/* Make containers feel more “designed” */
 .container{
   max-width: 1120px;
 }
 
-/* =========================================================
-   NAVIGATION (clean + technical)
-   ========================================================= */
-
+/* --------- Top Nav: glass + technical underline --------- */
 .topbar{
-  background: rgba(255,255,255,0.88);
-  backdrop-filter: blur(12px);
+  background: rgba(255,255,255,0.78);
+  backdrop-filter: blur(14px);
   border-bottom: 1px solid var(--border);
+}
+@media (prefers-color-scheme: dark){
+  .topbar{ background: rgba(5,11,22,0.62); }
+}
+
+.brand{
+  position: relative;
+  font-weight: 850;
+}
+.brand::after{
+  content:"";
+  position:absolute;
+  left:0;
+  bottom:-8px;
+  width: 28px;
+  height: 2px;
+  background: rgba(34,211,238,0.75);
+  border-radius: 999px;
+  opacity: 0.9;
 }
 
 .navlinks a{
   position: relative;
-  opacity: 0.85;
-  transition: opacity var(--dur) var(--ease);
+  opacity: 0.86;
+  transition: opacity var(--dur) var(--ease), transform var(--dur) var(--ease);
 }
-
 .navlinks a:hover{
   opacity: 1;
+  transform: translateY(-1px);
 }
-
-/* cyan technical underline */
 .navlinks a::after{
   content:"";
   position:absolute;
@@ -81,196 +135,285 @@ p{
   right:0;
   bottom:-10px;
   height:2px;
-  background: rgba(34,211,238,0.7);
+  background: linear-gradient(90deg, rgba(34,211,238,0.85), rgba(167,139,250,0.65));
   transform: scaleX(0);
   transform-origin: left;
   transition: transform var(--dur) var(--ease);
 }
+.navlinks a:hover::after{ transform: scaleX(1); }
 
-.navlinks a:hover::after{
-  transform: scaleX(1);
+/* Keyboard focus = pro feel */
+:focus-visible{
+  outline: 3px solid rgba(34,211,238,0.55);
+  outline-offset: 3px;
+  border-radius: 12px;
 }
 
-/* =========================================================
-   SECTIONS — subtle engineering texture everywhere
-   ========================================================= */
+/* --------- HERO: blueprint overlay + subtle scanline --------- */
+.hero{
+  position: relative;
+  overflow: hidden;
+  background:
+    radial-gradient(900px 520px at 18% 18%, rgba(255,255,255,0.14), rgba(255,255,255,0) 58%),
+    linear-gradient(135deg, var(--brandA), var(--brandB));
+}
 
+/* Blueprint grid: major + fine */
+.hero::before{
+  content:"";
+  position:absolute;
+  inset:-2px;
+  opacity: 0.18;
+  background:
+    linear-gradient(to right, rgba(255,255,255,0.22) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255,255,255,0.22) 1px, transparent 1px),
+    linear-gradient(to right, rgba(255,255,255,0.14) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255,255,255,0.14) 1px, transparent 1px);
+  background-size:
+    var(--grid) var(--grid),
+    var(--grid) var(--grid),
+    var(--gridFine) var(--gridFine),
+    var(--gridFine) var(--gridFine);
+  background-position: 0 0, 0 0, 0 0, 0 0;
+  mask-image: radial-gradient(circle at 22% 30%, rgba(0,0,0,1), rgba(0,0,0,0) 72%);
+  pointer-events:none;
+}
+
+/* Animated scanline (subtle, tasteful) */
+.hero::after{
+  content:"";
+  position:absolute;
+  inset:-40% -10%;
+  background: linear-gradient(
+    180deg,
+    transparent 0%,
+    rgba(34,211,238,0.10) 45%,
+    rgba(34,211,238,0.22) 50%,
+    rgba(34,211,238,0.10) 55%,
+    transparent 100%
+  );
+  opacity: 0.55;
+  transform: translateY(-25%);
+  pointer-events:none;
+}
+
+@media (prefers-reduced-motion: no-preference){
+  .hero::after{
+    animation: scan 7.5s linear infinite;
+  }
+}
+@keyframes scan{
+  from{ transform: translateY(-30%); }
+  to{ transform: translateY(30%); }
+}
+
+/* Blueprint corner marks (works even if you overlay an image) */
+.hero .container{ position: relative; }
+.hero .container::before,
+.hero .container::after{
+  content:"";
+  position:absolute;
+  width: 130px;
+  height: 130px;
+  border-color: rgba(34,211,238,0.45);
+  pointer-events:none;
+  opacity: 0.85;
+}
+.hero .container::before{
+  top: 10px; left: 10px;
+  border-top: 2px solid;
+  border-left: 2px solid;
+}
+.hero .container::after{
+  bottom: 10px; right: 10px;
+  border-bottom: 2px solid;
+  border-right: 2px solid;
+}
+
+/* Hero image frame: CAD viewport vibe */
+.heroCard{
+  border-radius: var(--radius-lg);
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.18);
+  box-shadow: 0 24px 90px rgba(2,6,23,0.32);
+}
+.heroImg{
+  border-radius: calc(var(--radius-lg) - 8px);
+  border: 1px solid rgba(255,255,255,0.16);
+  background:
+    radial-gradient(720px 300px at 25% 55%, rgba(34,211,238,0.26), rgba(34,211,238,0) 62%),
+    radial-gradient(520px 260px at 75% 30%, rgba(167,139,250,0.16), rgba(167,139,250,0) 60%),
+    repeating-linear-gradient(45deg, rgba(255,255,255,0.06) 0 12px, rgba(255,255,255,0.02) 12px 24px);
+}
+
+/* --------- Buttons: crisp + premium --------- */
+.btn{
+  border-radius: 14px;
+  transition: transform var(--dur) var(--ease), box-shadow var(--dur) var(--ease), filter var(--dur) var(--ease);
+  will-change: transform;
+}
+.btnPrimary{
+  background: rgba(255,255,255,0.96);
+  color: var(--brandA);
+  box-shadow: var(--shadow-sm);
+}
+.btnPrimary:hover{
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+.btnGhost{
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.28);
+}
+.btnGhost:hover{
+  transform: translateY(-2px);
+  filter: brightness(1.08);
+}
+
+/* --------- Sections: drawing-sheet separators --------- */
 .section{
   position: relative;
 }
+.section h2{
+  position: relative;
+  display: inline-block;
+  padding-bottom: 10px;
+}
+.section h2::after{
+  content:"";
+  position:absolute;
+  left:0;
+  bottom: 0;
+  width: 64%;
+  height: 2px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, rgba(34,211,238,0.70), rgba(167,139,250,0.55));
+  opacity: 0.75;
+}
 
+/* Subtle engineering texture everywhere (very light) */
 .section::before{
   content:"";
   position:absolute;
   inset:0;
   pointer-events:none;
-  opacity: 0.035;
+  opacity: 0.028;
   background:
     linear-gradient(to right, rgba(7,18,37,1) 1px, transparent 1px),
     linear-gradient(to bottom, rgba(7,18,37,1) 1px, transparent 1px);
-  background-size: 64px 64px;
+  background-size: 72px 72px;
 }
 
-/* =========================================================
-   HERO (image-safe: works even with image on top)
-   ========================================================= */
-
-.hero{
-  background: linear-gradient(135deg, var(--brand1), var(--brand2));
-}
-
-/* blueprint frame corners */
-.hero .container{
-  position: relative;
-}
-
-.hero .container::before,
-.hero .container::after{
-  content:"";
-  position:absolute;
-  width: 120px;
-  height: 120px;
-  border-color: rgba(34,211,238,0.45);
-  pointer-events:none;
-}
-
-.hero .container::before{
-  top: 10px;
-  left: 10px;
-  border-top: 2px solid;
-  border-left: 2px solid;
-}
-
-.hero .container::after{
-  bottom: 10px;
-  right: 10px;
-  border-bottom: 2px solid;
-  border-right: 2px solid;
-}
-
-/* =========================================================
-   BUTTONS — product / instrument panel feel
-   ========================================================= */
-
-.btn{
-  border-radius: 14px;
-  transition:
-    transform var(--dur) var(--ease),
-    box-shadow var(--dur) var(--ease),
-    background var(--dur) var(--ease);
-}
-
-.btnPrimary{
-  background: rgba(255,255,255,0.95);
-  color: var(--brand1);
-  box-shadow: var(--shadow-sm);
-}
-
-.btnPrimary:hover{
-  transform: translateY(-1px);
-  box-shadow: var(--shadow-lg);
-}
-
-.btnGhost{
-  background: rgba(255,255,255,0.06);
-  border: 1px solid rgba(255,255,255,0.28);
-}
-
-.btnGhost:hover{
-  background: rgba(255,255,255,0.12);
-  transform: translateY(-1px);
-}
-
-/* =========================================================
-   CARDS — premium tech surfaces
-   ========================================================= */
-
+/* --------- Cards: “component” feel + glow edge + micro-tilt --------- */
 .card{
   background: var(--card);
   border: 1px solid var(--border);
-  border-radius: var(--radius);
-  backdrop-filter: blur(10px);
+  border-radius: var(--radius-lg);
   box-shadow: var(--shadow-sm);
+  backdrop-filter: blur(10px);
   position: relative;
   overflow: hidden;
-  transition:
-    transform var(--dur) var(--ease),
-    box-shadow var(--dur) var(--ease);
+  transition: transform var(--dur) var(--ease), box-shadow var(--dur) var(--ease);
+  will-change: transform;
 }
 
-/* blueprint accent sweep */
+/* Animated “edge trace” like CAD selection */
 .card::before{
   content:"";
   position:absolute;
-  inset:0;
+  inset:-2px;
   opacity: 0;
   background:
-    linear-gradient(90deg,
-      rgba(34,211,238,0.45),
-      rgba(34,211,238,0) 60%);
+    radial-gradient(800px 200px at 15% 40%, rgba(34,211,238,0.25), transparent 60%),
+    radial-gradient(600px 220px at 85% 20%, rgba(167,139,250,0.18), transparent 55%),
+    linear-gradient(90deg, rgba(34,211,238,0.40), rgba(167,139,250,0.20));
   transition: opacity var(--dur) var(--ease);
   pointer-events:none;
 }
 
+/* “scanline shimmer” inside card on hover */
+.card::after{
+  content:"";
+  position:absolute;
+  inset:-60% -10%;
+  background: linear-gradient(
+    180deg,
+    transparent 0%,
+    rgba(34,211,238,0.10) 45%,
+    rgba(34,211,238,0.20) 50%,
+    rgba(34,211,238,0.10) 55%,
+    transparent 100%
+  );
+  opacity: 0;
+  transform: translateY(-30%);
+  pointer-events:none;
+}
+
 .card:hover{
-  transform: translateY(-6px);
+  transform: translateY(-7px);
   box-shadow: var(--shadow-lg);
 }
+.card:hover::before{ opacity: 0.22; }
 
-.card:hover::before{
-  opacity: 0.22;
+@media (prefers-reduced-motion: no-preference){
+  .card:hover::after{
+    opacity: 0.55;
+    animation: scan 2.6s linear infinite;
+  }
 }
 
-/* thumbnails feel technical even without images */
+/* Thumbnails: CAD-ish placeholder until you use real images */
 .thumb{
   background:
-    radial-gradient(650px 220px at 15% 50%, rgba(34,211,238,0.28), rgba(34,211,238,0) 55%),
+    radial-gradient(650px 240px at 20% 50%, rgba(34,211,238,0.28), rgba(34,211,238,0) 58%),
     linear-gradient(135deg, rgba(7,18,37,0.06), rgba(7,18,37,0.02));
 }
 
-/* =========================================================
-   BADGES / PILLS
-   ========================================================= */
-
+/* Badges: chip-style */
 .badge{
   border-radius: 999px;
   padding: 6px 10px;
-  font-weight: 700;
+  font-weight: 800;
   border: 1px solid rgba(7,18,37,0.12);
-  background: rgba(255,255,255,0.6);
+  background: rgba(255,255,255,0.62);
+}
+@media (prefers-color-scheme: dark){
+  .badge{ background: rgba(255,255,255,0.06); }
 }
 
+/* Pills: tech chips */
 .pill{
   background: rgba(255,255,255,0.08);
   border: 1px solid rgba(255,255,255,0.14);
 }
 
-/* =========================================================
-   GLOBAL MOTION (subtle, professional)
-   ========================================================= */
+/* --------- Footer: subtle divider --------- */
+.footer{
+  border-top: 1px solid var(--border);
+  color: var(--muted);
+}
 
+/* --------- Motion: tasteful page-load reveal --------- */
 @media (prefers-reduced-motion: no-preference){
-  .heroGrid > div,
-  .heroCard,
-  .section h2,
-  .section .lead,
+  .heroGrid > div{
+    animation: fadeUp 520ms var(--ease) both;
+  }
+  .heroCard{
+    animation: fadeUp 720ms var(--ease) both;
+    animation-delay: 80ms;
+  }
+  .section h2, .section .lead{
+    animation: fadeUp 520ms var(--ease) both;
+  }
   .grid .card{
     animation: fadeUp 520ms var(--ease) both;
   }
-
   .grid .card:nth-child(2){ animation-delay: 60ms; }
   .grid .card:nth-child(3){ animation-delay: 120ms; }
   .grid .card:nth-child(4){ animation-delay: 180ms; }
 }
 
 @keyframes fadeUp{
-  from{
-    opacity: 0;
-    transform: translateY(10px);
-  }
-  to{
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from{ opacity: 0; transform: translateY(10px); }
+  to{ opacity: 1; transform: translateY(0); }
 }
-
