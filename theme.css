@@ -1,11 +1,13 @@
 /* =========================================================
    THEME.CSS — Engineering / Blueprint Portfolio
-   IMAGE AREA REDUCED ~30% (FINAL TUNED VERSION)
+   Smooth hero-to-page blend + very light blue below
    ========================================================= */
 
 /* ------------------ VARIABLES ------------------ */
 :root{
-  --bg: #f6f8fc;
+  --bg: #f3f8ff;            /* very light blue page background */
+  --bg2: #eef6ff;           /* subtle second tint for depth */
+
   --text: #071225;
   --muted: #4b5b76;
 
@@ -14,7 +16,7 @@
   --accent: #22d3ee;
 
   --border: rgba(255,255,255,0.18);
-  --card: rgba(255,255,255,0.78);
+  --card: rgba(255,255,255,0.82);
 
   --radius: 18px;
   --ease: cubic-bezier(.2,.8,.2,1);
@@ -26,8 +28,8 @@ html{ scroll-behavior: smooth; }
 
 body{
   background:
-    radial-gradient(1200px 600px at 15% 10%, rgba(34,211,238,.08), transparent 60%),
-    linear-gradient(180deg, var(--bg), #eef3fb);
+    radial-gradient(1200px 700px at 18% 8%, rgba(34,211,238,.08), transparent 60%),
+    linear-gradient(180deg, var(--bg), var(--bg2));
   color: var(--text);
 }
 
@@ -73,7 +75,7 @@ p{ line-height:1.65; }
   background:linear-gradient(135deg,var(--brandA),var(--brandB));
 }
 
-/* Blueprint grid */
+/* Blueprint grid (layer 0) */
 .hero::before{
   content:"";
   position:absolute;
@@ -87,6 +89,22 @@ p{ line-height:1.65; }
   background-size:36px 36px;
 }
 
+/* Smooth fade at bottom of hero INTO the light-blue page */
+.hero .heroFade{
+  position:absolute;
+  left:0; right:0; bottom:0;
+  height: 160px;                 /* adjust blend length */
+  pointer-events:none;
+  z-index:1;
+  background: linear-gradient(
+    to bottom,
+    rgba(6,26,58,0) 0%,
+    rgba(6,26,58,0.25) 20%,
+    rgba(243,248,255,0.85) 70%,
+    rgba(243,248,255,1) 100%
+  );
+}
+
 /* Content ABOVE overlays */
 .hero .container{
   position:relative;
@@ -94,7 +112,7 @@ p{ line-height:1.65; }
 }
 
 /* =========================================================
-   BLUEPRINT CORNERS
+   BLUEPRINT CORNERS (separate control)
    ========================================================= */
 .hero::after{
   content:"";
@@ -128,20 +146,19 @@ p{ line-height:1.65; }
 }
 
 /* =========================================================
-   HERO IMAGE AREA (≈30% SMALLER)
+   HERO IMAGE AREA (≈30% smaller)
    ========================================================= */
 .heroCard{
   background:rgba(255,255,255,.05);
   border:1px solid rgba(255,255,255,.16);
   border-radius:var(--radius);
-  padding:11px;              /* ↓ from 16px (~30%) */
+  padding:11px;
 }
 
-/* Square image */
 .heroImg{
   aspect-ratio:1 / 1;
   width:100%;
-  max-width:250px;           /* ↓ from 360px (~30%) */
+  max-width:250px;
   margin:auto;
 
   border-radius:14px;
@@ -175,16 +192,29 @@ p{ line-height:1.65; }
   position:relative;
 }
 
+/* Light blueprint grid (very subtle) so text stays crisp */
 .section::before{
   content:"";
   position:absolute;
   inset:0;
-  opacity:.03;
+  opacity:.045; /* subtle */
   background:
-    linear-gradient(to right, #071225 1px, transparent 1px),
-    linear-gradient(to bottom, #071225 1px, transparent 1px);
+    linear-gradient(to right, rgba(7,18,37,.9) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(7,18,37,.9) 1px, transparent 1px);
   background-size:72px 72px;
   pointer-events:none;
+}
+
+/* Make section content sit above the grid */
+.section .container{
+  position:relative;
+  z-index:1;
+}
+
+/* Ensure Featured Projects reads clearly */
+.section h2,
+.section p{
+  text-shadow: 0 1px 0 rgba(255,255,255,0.6);
 }
 
 /* =========================================================
