@@ -1,59 +1,28 @@
 /* =========================================================
-   theme.css — Blueprint/Tech skin (layout-safe overrides)
+   theme.css — Blueprint/Tech skin + clean hero→projects blend
    ========================================================= */
 
 :root{
-  --page: #f3f8ff;          /* very light blue background */
+  --page: #f3f8ff;          /* very light blue */
   --page2:#eef6ff;
   --ink:  #071225;
 
   --heroA:#061a3a;
   --heroB:#0b4ea2;
 
-  --accent:#22d3ee;
   --radius:18px;
-
   --glass: rgba(255,255,255,.06);
   --glassBorder: rgba(255,255,255,.16);
 }
 
-/* ---------- PAGE BG ---------- */
+/* PAGE BACKGROUND */
 body{
   background: linear-gradient(180deg, var(--page), var(--page2));
   color: var(--ink);
 }
 
 /* =========================================================
-   HARD "LAYOUT LOCK" FOR HERO (prevents shifting)
-   These override ANY accidental padding/margins from other css
-   ========================================================= */
-
-/* keep hero content centered consistently */
-.hero .container{
-  max-width: 1120px;
-  margin: 0 auto;
-  padding-left: 24px;
-  padding-right: 24px;
-
-  position: relative;
-  z-index: 3;
-}
-
-/* lock hero grid alignment */
-.heroGrid{
-  display: grid;
-  grid-template-columns: 1.1fr 0.9fr;
-  gap: 56px;
-  align-items: center;
-}
-
-/* responsive */
-@media (max-width: 900px){
-  .heroGrid{ grid-template-columns: 1fr; }
-}
-
-/* =========================================================
-   HERO VISUALS (do not affect layout)
+   HERO (no fade overlay on text)
    ========================================================= */
 .hero{
   position: relative;
@@ -61,7 +30,7 @@ body{
   background: linear-gradient(135deg, var(--heroA), var(--heroB));
 }
 
-/* blueprint grid */
+/* blueprint grid in hero */
 .hero::before{
   content:"";
   position:absolute;
@@ -75,25 +44,30 @@ body{
   background-size:36px 36px;
 }
 
-/* bottom fade only (keeps projects readable) */
-.hero::after{
-  content:"";
-  position:absolute;
-  left:0; right:0; bottom:0;
-  height:110px;
-  z-index:1;
-  pointer-events:none;
-  background: linear-gradient(
-    to bottom,
-    rgba(243,248,255,0) 0%,
-    rgba(243,248,255,.18) 55%,
-    rgba(243,248,255,.70) 82%,
-    rgba(243,248,255,1) 100%
-  );
+/* keep hero content above background */
+.hero .container{
+  position: relative;
+  z-index: 3;
+  max-width: 1120px;
+  margin: 0 auto;
+  padding-left: 24px;
+  padding-right: 24px;
+}
+
+/* lock grid so it doesn’t shift */
+.heroGrid{
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 56px;
+  align-items: center;
+}
+
+@media (max-width: 900px){
+  .heroGrid{ grid-template-columns: 1fr; }
 }
 
 /* =========================================================
-   CORNER LINES (separate element so no pseudo conflict)
+   CORNER LINES (two right-angle white lines)
    ========================================================= */
 .heroCorners{
   position:absolute;
@@ -127,7 +101,7 @@ body{
 }
 
 /* =========================================================
-   HERO IMAGE BOX (square + smaller, doesn’t shift layout)
+   HERO IMAGE AREA (square + smaller)
    ========================================================= */
 .heroCard{
   background: var(--glass);
@@ -139,13 +113,12 @@ body{
 .heroImg{
   aspect-ratio: 1 / 1;
   width: 100%;
-  max-width: 260px;     /* adjust if you want bigger/smaller */
-  margin-left: auto;
-  margin-right: auto;
+  max-width: 260px;      /* change this if you want bigger/smaller */
+  margin: 0 auto;
   border-radius: 14px;
   border: 1px solid rgba(255,255,255,.14);
   background:
-    radial-gradient(520px 260px at 50% 50%, rgba(34,211,238,.18), transparent 60%),
+    radial-gradient(520px 260px at 50% 50%, rgba(255,255,255,.10), transparent 60%),
     repeating-linear-gradient(
       45deg,
       rgba(255,255,255,.06) 0 12px,
@@ -154,10 +127,30 @@ body{
 }
 
 /* =========================================================
-   LIGHT BLUE GRID BELOW (subtle)
+   HERO → PROJECTS TRANSITION (the blend band)
    ========================================================= */
+.heroFade{
+  height: 140px;
+  background: linear-gradient(
+    to bottom,
+    rgba(6,26,58,1) 0%,
+    rgba(11,78,162,.75) 20%,
+    rgba(210,228,248,.55) 55%,
+    rgba(235,245,255,.85) 80%,
+    #f3f8ff 100%
+  );
+}
+
+/* =========================================================
+   SECTIONS BELOW (keep readable + subtle grid)
+   ========================================================= */
+#projects.section{
+  background: #f3f8ff;
+}
+
 .section{
   position: relative;
+  background: transparent;
 }
 
 .section::before{
@@ -175,31 +168,4 @@ body{
 .section .container{
   position: relative;
   z-index: 1;
-}
-/* =========================================================
-   BLEND FIX — FORCE VISIBLE TRANSITION
-   (paste at very bottom of theme.css)
-   ========================================================= */
-
-/* 1) Make sure the section below the hero is the same light-blue target */
-#projects.section{
-  background: linear-gradient(180deg, #f3f8ff 0%, #eef6ff 100%) !important;
-}
-
-/* 2) If any base CSS is painting sections white, kill it */
-.section{
-  background: transparent !important;
-}
-
-/* 3) Stronger, longer fade that starts lower (won’t cover hero text) */
-.hero::after{
-  height: 160px !important;
-  background: linear-gradient(
-    to bottom,
-    rgba(243,248,255,0) 0%,
-    rgba(243,248,255,0) 45%,
-    rgba(243,248,255,.25) 60%,
-    rgba(243,248,255,.65) 78%,
-    rgba(243,248,255,1) 100%
-  ) !important;
 }
