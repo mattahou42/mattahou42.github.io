@@ -1,241 +1,50 @@
 /* =========================================================
-   THEME.CSS — Engineering / Blueprint Portfolio
-   FIX: hero fade no longer covers text
+   HERO — CLEAN BOTTOM BLEND (NO TEXT OVERLAP)
    ========================================================= */
 
-/* ------------------ VARIABLES ------------------ */
-:root{
-  --bg: #f3f8ff;            /* very light blue */
-  --bg2: #eef6ff;
-
-  --text: #071225;
-  --muted: #4b5b76;
-
-  --brandA: #061a3a;
-  --brandB: #0b4ea2;
-  --accent: #22d3ee;
-
-  --border: rgba(255,255,255,0.18);
-  --card: rgba(255,255,255,0.82);
-
-  --radius: 18px;
-  --ease: cubic-bezier(.2,.8,.2,1);
-  --dur: 260ms;
-}
-
-/* ------------------ GLOBAL ------------------ */
-html{ scroll-behavior: smooth; }
-
-body{
-  background:
-    radial-gradient(1200px 700px at 18% 8%, rgba(34,211,238,.08), transparent 60%),
-    linear-gradient(180deg, var(--bg), var(--bg2));
-  color: var(--text);
-}
-
-h1,h2,h3{ letter-spacing:-0.02em; }
-p{ line-height:1.65; }
-.lead,.desc{ color:var(--muted); }
-
-.container{ max-width:1120px; }
-
-/* ------------------ NAV ------------------ */
-.topbar{
-  background:rgba(255,255,255,.88);
-  backdrop-filter:blur(14px);
-  border-bottom:1px solid rgba(0,0,0,.08);
-}
-
-.navlinks a{
-  position:relative;
-  opacity:.85;
-}
-
-.navlinks a::after{
-  content:"";
-  position:absolute;
-  left:0; right:0; bottom:-10px;
-  height:2px;
-  background:var(--accent);
-  transform:scaleX(0);
-  transform-origin:left;
-  transition:transform var(--dur) var(--ease);
-}
-
-.navlinks a:hover::after{ transform:scaleX(1); }
-
-/* =========================================================
-   HERO
-   ========================================================= */
 .hero{
-  position:relative;
-  overflow:hidden;
-  background:linear-gradient(135deg,var(--brandA),var(--brandB));
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(135deg, #061a3a, #0b4ea2);
 }
 
-/* Grid (lowest visual layer) */
+/* Blueprint grid */
 .hero::before{
   content:"";
   position:absolute;
   inset:0;
   z-index:0;
+  opacity:.22;
   pointer-events:none;
-  opacity:.25;
   background:
     linear-gradient(to right, rgba(255,255,255,.22) 1px, transparent 1px),
     linear-gradient(to bottom, rgba(255,255,255,.22) 1px, transparent 1px);
   background-size:36px 36px;
 }
 
-/* Fade blend (ABOVE grid + hero bg, BELOW corners + content) */
-.hero .heroFade{
+/* === THIS is the bottom fade — ONLY affects the edge === */
+.hero::after{
+  content:"";
   position:absolute;
-  left:0; right:0; bottom:0;
-  height: 140px;            /* shorter so it starts lower */
-  pointer-events:none;
+  left:0;
+  right:0;
+  bottom:-1px;
+  height:110px;
   z-index:1;
+  pointer-events:none;
 
-  /* Starts transparent for most of its height, only brightens near the bottom */
   background: linear-gradient(
     to bottom,
     rgba(243,248,255,0) 0%,
-    rgba(243,248,255,0.00) 40%,
-    rgba(243,248,255,0.30) 65%,
-    rgba(243,248,255,0.78) 85%,
+    rgba(243,248,255,0.15) 40%,
+    rgba(243,248,255,0.45) 65%,
+    rgba(243,248,255,0.85) 85%,
     rgba(243,248,255,1) 100%
   );
 }
 
-/* Corners ABOVE fade */
-.hero::after{
-  content:"";
-  position:absolute;
-  inset:0;
-  z-index:2;
-  pointer-events:none;
-
-  --c: rgba(255,255,255,.55);
-  --t: 2px;
-
-  --lt-offset: 56px;
-  --lt-length: 140px;
-
-  --rb-offset-x: 40px;
-  --rb-offset-y: 40px;
-  --rb-length: 110px;
-
-  background:
-    /* top-left */
-    linear-gradient(var(--c),var(--c))
-      left var(--lt-offset) top var(--lt-offset) / var(--lt-length) var(--t) no-repeat,
-    linear-gradient(var(--c),var(--c))
-      left var(--lt-offset) top var(--lt-offset) / var(--t) var(--lt-length) no-repeat,
-
-    /* bottom-right */
-    linear-gradient(var(--c),var(--c))
-      right var(--rb-offset-x) bottom var(--rb-offset-y) / var(--rb-length) var(--t) no-repeat,
-    linear-gradient(var(--c),var(--c))
-      right var(--rb-offset-x) bottom var(--rb-offset-y) / var(--t) var(--rb-length) no-repeat;
-}
-
-/* Content highest (so fade NEVER covers text) */
+/* Content ALWAYS above visuals */
 .hero .container{
-  position:relative;
-  z-index:3;
-}
-
-/* =========================================================
-   HERO IMAGE AREA (≈30% smaller)
-   ========================================================= */
-.heroCard{
-  background:rgba(255,255,255,.05);
-  border:1px solid rgba(255,255,255,.16);
-  border-radius:var(--radius);
-  padding:11px;
-}
-
-.heroImg{
-  aspect-ratio:1 / 1;
-  width:100%;
-  max-width:250px;
-  margin:auto;
-
-  border-radius:14px;
-  border:1px solid rgba(255,255,255,.14);
-
-  background:
-    radial-gradient(520px 260px at 50% 50%, rgba(34,211,238,.20), transparent 60%),
-    repeating-linear-gradient(
-      45deg,
-      rgba(255,255,255,.06) 0 12px,
-      rgba(255,255,255,.02) 12px 24px
-    );
-}
-
-/* =========================================================
-   BUTTONS
-   ========================================================= */
-.btn{
-  border-radius:14px;
-  transition:transform var(--dur) var(--ease);
-}
-.btn:hover{ transform:translateY(-2px); }
-
-/* =========================================================
-   SECTIONS
-   ========================================================= */
-.section{
-  position:relative;
-}
-
-/* Very subtle blueprint grid so text stays crisp */
-.section::before{
-  content:"";
-  position:absolute;
-  inset:0;
-  opacity:.04;
-  background:
-    linear-gradient(to right, rgba(7,18,37,.35) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(7,18,37,.35) 1px, transparent 1px);
-  background-size:72px 72px;
-  pointer-events:none;
-}
-
-.section .container{
-  position:relative;
-  z-index:1;
-}
-
-/* =========================================================
-   CARDS
-   ========================================================= */
-.card{
-  background:var(--card);
-  border-radius:var(--radius);
-  border:1px solid rgba(0,0,0,.08);
-  transition:transform var(--dur) var(--ease);
-}
-.card:hover{ transform:translateY(-6px); }
-
-/* =========================================================
-   FOOTER
-   ========================================================= */
-.footer{
-  border-top:1px solid rgba(0,0,0,.08);
-  color:var(--muted);
-}
-
-/* =========================================================
-   MOTION
-   ========================================================= */
-@media (prefers-reduced-motion:no-preference){
-  .hero .container > *,
-  .card{
-    animation:fadeUp .6s var(--ease) both;
-  }
-}
-
-@keyframes fadeUp{
-  from{ opacity:0; transform:translateY(10px); }
-  to{ opacity:1; transform:none; }
+  position: relative;
+  z-index: 3;
 }
