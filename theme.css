@@ -1,12 +1,12 @@
 /* =========================================================
    THEME.CSS — Engineering / Blueprint Portfolio
-   Smooth hero-to-page blend + very light blue below
+   FIX: hero fade no longer covers text
    ========================================================= */
 
 /* ------------------ VARIABLES ------------------ */
 :root{
-  --bg: #f3f8ff;            /* very light blue page background */
-  --bg2: #eef6ff;           /* subtle second tint for depth */
+  --bg: #f3f8ff;            /* very light blue */
+  --bg2: #eef6ff;
 
   --text: #071225;
   --muted: #4b5b76;
@@ -62,9 +62,7 @@ p{ line-height:1.65; }
   transition:transform var(--dur) var(--ease);
 }
 
-.navlinks a:hover::after{
-  transform:scaleX(1);
-}
+.navlinks a:hover::after{ transform:scaleX(1); }
 
 /* =========================================================
    HERO
@@ -75,7 +73,7 @@ p{ line-height:1.65; }
   background:linear-gradient(135deg,var(--brandA),var(--brandB));
 }
 
-/* Blueprint grid (layer 0) */
+/* Grid (lowest visual layer) */
 .hero::before{
   content:"";
   position:absolute;
@@ -89,36 +87,31 @@ p{ line-height:1.65; }
   background-size:36px 36px;
 }
 
-/* Smooth fade at bottom of hero INTO the light-blue page */
+/* Fade blend (ABOVE grid + hero bg, BELOW corners + content) */
 .hero .heroFade{
   position:absolute;
   left:0; right:0; bottom:0;
-  height: 160px;                 /* adjust blend length */
+  height: 140px;            /* shorter so it starts lower */
   pointer-events:none;
   z-index:1;
+
+  /* Starts transparent for most of its height, only brightens near the bottom */
   background: linear-gradient(
     to bottom,
-    rgba(6,26,58,0) 0%,
-    rgba(6,26,58,0.25) 20%,
-    rgba(243,248,255,0.85) 70%,
+    rgba(243,248,255,0) 0%,
+    rgba(243,248,255,0.00) 40%,
+    rgba(243,248,255,0.30) 65%,
+    rgba(243,248,255,0.78) 85%,
     rgba(243,248,255,1) 100%
   );
 }
 
-/* Content ABOVE overlays */
-.hero .container{
-  position:relative;
-  z-index:2;
-}
-
-/* =========================================================
-   BLUEPRINT CORNERS (separate control)
-   ========================================================= */
+/* Corners ABOVE fade */
 .hero::after{
   content:"";
   position:absolute;
   inset:0;
-  z-index:1;
+  z-index:2;
   pointer-events:none;
 
   --c: rgba(255,255,255,.55);
@@ -143,6 +136,12 @@ p{ line-height:1.65; }
       right var(--rb-offset-x) bottom var(--rb-offset-y) / var(--rb-length) var(--t) no-repeat,
     linear-gradient(var(--c),var(--c))
       right var(--rb-offset-x) bottom var(--rb-offset-y) / var(--t) var(--rb-length) no-repeat;
+}
+
+/* Content highest (so fade NEVER covers text) */
+.hero .container{
+  position:relative;
+  z-index:3;
 }
 
 /* =========================================================
@@ -180,10 +179,7 @@ p{ line-height:1.65; }
   border-radius:14px;
   transition:transform var(--dur) var(--ease);
 }
-
-.btn:hover{
-  transform:translateY(-2px);
-}
+.btn:hover{ transform:translateY(-2px); }
 
 /* =========================================================
    SECTIONS
@@ -192,29 +188,22 @@ p{ line-height:1.65; }
   position:relative;
 }
 
-/* Light blueprint grid (very subtle) so text stays crisp */
+/* Very subtle blueprint grid so text stays crisp */
 .section::before{
   content:"";
   position:absolute;
   inset:0;
-  opacity:.045; /* subtle */
+  opacity:.04;
   background:
-    linear-gradient(to right, rgba(7,18,37,.9) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(7,18,37,.9) 1px, transparent 1px);
+    linear-gradient(to right, rgba(7,18,37,.35) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(7,18,37,.35) 1px, transparent 1px);
   background-size:72px 72px;
   pointer-events:none;
 }
 
-/* Make section content sit above the grid */
 .section .container{
   position:relative;
   z-index:1;
-}
-
-/* Ensure Featured Projects reads clearly */
-.section h2,
-.section p{
-  text-shadow: 0 1px 0 rgba(255,255,255,0.6);
 }
 
 /* =========================================================
@@ -226,10 +215,7 @@ p{ line-height:1.65; }
   border:1px solid rgba(0,0,0,.08);
   transition:transform var(--dur) var(--ease);
 }
-
-.card:hover{
-  transform:translateY(-6px);
-}
+.card:hover{ transform:translateY(-6px); }
 
 /* =========================================================
    FOOTER
