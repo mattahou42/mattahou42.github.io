@@ -1,181 +1,187 @@
-/* ===============================
-   GLOBAL VARIABLES
-================================ */
-:root{
-  --blue-dark: #061a3a;
-  --blue-mid: #0b4ea2;
-  --blue-light: #e9f2fb;
-  --blue-grid: rgba(255,255,255,0.06);
-  --white-line: rgba(255,255,255,0.7);
-}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Filler Name | Engineering Portfolio</title>
 
-/* ===============================
-   HERO SECTION
-================================ */
-.hero{
-  position: relative;
-  padding: 110px 0 90px;
-  background:
-    linear-gradient(to right, rgba(0,0,0,.25), rgba(0,0,0,0)),
-    linear-gradient(to bottom, var(--blue-dark), var(--blue-mid));
-  overflow: hidden;
-}
+  <!-- Base styles -->
+  <link rel="stylesheet" href="styles.css">
+  <!-- Theme styles (blueprint / tech) -->
+  <link rel="stylesheet" href="theme.css">
+</head>
+<body>
 
-/* Blueprint grid overlay */
-.hero::before{
-  content:"";
-  position:absolute;
-  inset:0;
-  background-image:
-    linear-gradient(var(--blue-grid) 1px, transparent 1px),
-    linear-gradient(90deg, var(--blue-grid) 1px, transparent 1px);
-  background-size: 40px 40px;
-  pointer-events:none;
-}
+  <!-- ===============================
+       NAV BAR
+  ================================ -->
+  <div class="topbar">
+    <div class="container">
+      <div class="nav">
+        <div class="brand">Filler Name</div>
+        <div class="navlinks">
+          <a href="#projects">Projects</a>
+          <a href="#resume">Resume</a>
+          <a href="#contact">Contact</a>
+        </div>
+      </div>
+    </div>
+  </div>
 
-/* ===============================
-   HERO CONTENT GRID
-================================ */
-.heroGrid{
-  display:grid;
-  grid-template-columns: 1.1fr 0.9fr;
-  gap:80px;
-  align-items:center;
-  position:relative;
-  z-index:2;
-}
+  <!-- ===============================
+       HERO SECTION
+  ================================ -->
+  <section class="hero">
 
-.hero h1{
-  font-size:3.2rem;
-  margin-bottom:10px;
-}
+    <!-- left blueprint corner -->
+    <div class="cornerLeft"></div>
 
-.subtitle{
-  font-weight:600;
-  opacity:.95;
-  margin-bottom:18px;
-}
+    <div class="container">
+      <div class="heroGrid">
 
-.bodyText{
-  max-width:520px;
-  opacity:.95;
-}
+        <!-- TEXT SIDE -->
+        <div>
+          <h1>Filler Name</h1>
 
-/* ===============================
-   IMAGE CARD
-================================ */
-.heroCard{
-  position:relative;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-}
+          <p class="subtitle">
+            Filler Title Line (e.g., Mechanical Engineering Student)
+          </p>
 
-/* Outer glass frame */
-.heroCard::before{
-  content:"";
-  position:absolute;
-  width:360px;
-  height:360px;
-  border-radius:24px;
-  background:rgba(255,255,255,0.06);
-  backdrop-filter: blur(4px);
-}
+          <p class="bodyText">
+            Filler paragraph text. This is where you describe what you do in a
+            professional way: design, CAD, prototyping, testing, iteration,
+            and teamwork.
+          </p>
 
-/* Inner square image placeholder */
-.heroImg{
-  width:260px;
-  height:260px;
-  border-radius:18px;
-  background:
-    repeating-linear-gradient(
-      45deg,
-      rgba(255,255,255,.12),
-      rgba(255,255,255,.12) 10px,
-      rgba(255,255,255,.05) 10px,
-      rgba(255,255,255,.05) 20px
-    );
-  z-index:1;
-}
+          <p class="caption">
+            Filler caption text describing the image on the right.
+          </p>
 
-/* ===============================
-   BLUEPRINT CORNER LINES
-================================ */
-.hero::after{
-  content:"";
-  position:absolute;
-  right:60px;
-  bottom:120px;
-  width:120px;
-  height:120px;
-  border-right:2px solid var(--white-line);
-  border-bottom:2px solid var(--white-line);
-}
+          <div class="ctaRow">
+            <a class="btn btnPrimary" href="#projects">See Projects</a>
+            <a class="btn btnGhost" href="#resume">Download Resume</a>
+          </div>
 
-.hero .cornerLeft{
-  position:absolute;
-  left:60px;
-  top:140px;
-  width:120px;
-  height:120px;
-  border-left:2px solid var(--white-line);
-  border-top:2px solid var(--white-line);
-}
+          <div class="pills">
+            <div class="pill">X Major Projects</div>
+            <div class="pill">Y+ Years Experience</div>
+            <div class="pill">100% Hands-on</div>
+          </div>
+        </div>
 
-/* ===============================
-   HERO → PROJECTS FADE
-================================ */
-.heroFade{
-  height:140px;
-  background: linear-gradient(
-    to bottom,
-    rgba(6,26,58,0) 0%,
-    rgba(11,78,162,.45) 30%,
-    rgba(210,228,248,.65) 70%,
-    var(--blue-light) 100%
-  );
-}
+        <!-- IMAGE SIDE -->
+        <div class="heroCard">
+          <div class="heroImg" title="Portrait image placeholder"></div>
+        </div>
 
-/* ===============================
-   BUTTONS & PILLS
-================================ */
-.btn{
-  display:inline-block;
-  padding:12px 20px;
-  border-radius:12px;
-  font-weight:600;
-  transition:.2s ease;
-}
+      </div>
+    </div>
+  </section>
 
-.btnPrimary{
-  background:white;
-  color:#0b4ea2;
-}
+  <!-- Smooth fade between hero and content -->
+  <div class="heroFade"></div>
 
-.btnPrimary:hover{
-  transform:translateY(-1px);
-}
+  <!-- ===============================
+       PROJECTS
+  ================================ -->
+  <section class="section" id="projects">
+    <div class="container">
+      <h2>Featured Projects</h2>
+      <p class="lead">Click a card to view details.</p>
 
-.btnGhost{
-  border:1px solid rgba(255,255,255,.35);
-}
+      <div class="grid">
 
-.pills{
-  display:flex;
-  gap:10px;
-  margin-top:22px;
-}
+        <a class="card" href="#">
+          <div class="thumb"></div>
+          <div class="cardBody">
+            <span class="badge blue">Class Project</span>
+            <div class="title">Project Title — Filler Subtitle</div>
+            <div class="metaRow">📅 Jan 20XX — Present</div>
+            <div class="tagRow">
+              <span class="tag">CAD</span>
+              <span class="tag">Analysis</span>
+              <span class="tag">Prototyping</span>
+            </div>
+            <p class="desc">
+              Short description summarizing the project at a glance.
+            </p>
+          </div>
+        </a>
 
-.pill{
-  padding:8px 14px;
-  border-radius:999px;
-  background:rgba(255,255,255,.12);
-  font-size:.85rem;
-}
+        <a class="card" href="#">
+          <div class="thumb"></div>
+          <div class="cardBody">
+            <span class="badge green">Design Team</span>
+            <div class="title">Project Title — Filler Subtitle</div>
+            <div class="metaRow">📅 Feb 20XX — Present</div>
+            <div class="tagRow">
+              <span class="tag">SolidWorks</span>
+              <span class="tag">Testing</span>
+              <span class="tag">Iteration</span>
+            </div>
+            <p class="desc">
+              Short description summarizing the project at a glance.
+            </p>
+          </div>
+        </a>
 
-/* ===============================
-   PROJECTS SECTION BACKGROUND
-================================ */
-.section{
-  background:var(--blue-light);
-}
+        <a class="card" href="#">
+          <div class="thumb"></div>
+          <div class="cardBody">
+            <span class="badge red">Personal Project</span>
+            <div class="title">Project Title — Filler Subtitle</div>
+            <div class="metaRow">📅 Mar 20XX — Present</div>
+            <div class="tagRow">
+              <span class="tag">Electronics</span>
+              <span class="tag">Controls</span>
+              <span class="tag">Safety</span>
+            </div>
+            <p class="desc">
+              Short description summarizing the project at a glance.
+            </p>
+          </div>
+        </a>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===============================
+       RESUME
+  ================================ -->
+  <section class="section" id="resume">
+    <div class="container">
+      <h2>Resume</h2>
+      <p class="lead">
+        Download my resume or view my experience and skills.
+      </p>
+    </div>
+  </section>
+
+  <!-- ===============================
+       CONTACT
+  ================================ -->
+  <section class="section" id="contact">
+    <div class="container">
+      <h2>Contact</h2>
+      <p class="lead">Let’s get in touch.</p>
+
+      <div class="panel">
+        <p><strong>Email:</strong> filler.email@example.com</p>
+        <p><strong>LinkedIn:</strong> linkedin.com/in/filler</p>
+        <p><strong>GitHub:</strong> github.com/filler</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===============================
+       FOOTER
+  ================================ -->
+  <div class="footer">
+    <div class="container">
+      © 20XX Filler Name — Built with GitHub Pages
+    </div>
+  </div>
+
+</body>
+</html>
