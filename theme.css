@@ -1,6 +1,6 @@
 /* =========================================================
    THEME.CSS — Engineering / Blueprint Portfolio
-   FINAL STABLE VERSION
+   IMAGE AREA REDUCED ~30% (FINAL TUNED VERSION)
    ========================================================= */
 
 /* ------------------ VARIABLES ------------------ */
@@ -94,7 +94,7 @@ p{ line-height:1.65; }
 }
 
 /* =========================================================
-   BLUEPRINT CORNERS (SEPARATE CONTROL)
+   BLUEPRINT CORNERS
    ========================================================= */
 .hero::after{
   content:"";
@@ -103,26 +103,24 @@ p{ line-height:1.65; }
   z-index:1;
   pointer-events:none;
 
-  /* Left/top corner tuning */
-  --lt-offset: 56px;
-  --lt-length: 140px;
-
-  /* Right/bottom corner tuning (THIS IS THE FIX) */
-  --rb-offset-x: 32px;
-  --rb-offset-y: 32px;
-  --rb-length: 120px;
-
   --c: rgba(255,255,255,.55);
   --t: 2px;
 
+  --lt-offset: 56px;
+  --lt-length: 140px;
+
+  --rb-offset-x: 40px;
+  --rb-offset-y: 40px;
+  --rb-length: 110px;
+
   background:
-    /* TOP-LEFT */
+    /* top-left */
     linear-gradient(var(--c),var(--c))
       left var(--lt-offset) top var(--lt-offset) / var(--lt-length) var(--t) no-repeat,
     linear-gradient(var(--c),var(--c))
       left var(--lt-offset) top var(--lt-offset) / var(--t) var(--lt-length) no-repeat,
 
-    /* BOTTOM-RIGHT (independently controlled) */
+    /* bottom-right */
     linear-gradient(var(--c),var(--c))
       right var(--rb-offset-x) bottom var(--rb-offset-y) / var(--rb-length) var(--t) no-repeat,
     linear-gradient(var(--c),var(--c))
@@ -130,26 +128,27 @@ p{ line-height:1.65; }
 }
 
 /* =========================================================
-   HERO IMAGE (SQUARE)
+   HERO IMAGE AREA (≈30% SMALLER)
    ========================================================= */
 .heroCard{
-  background:rgba(255,255,255,.06);
-  border:1px solid rgba(255,255,255,.18);
+  background:rgba(255,255,255,.05);
+  border:1px solid rgba(255,255,255,.16);
   border-radius:var(--radius);
-  padding:16px;
+  padding:11px;              /* ↓ from 16px (~30%) */
 }
 
+/* Square image */
 .heroImg{
   aspect-ratio:1 / 1;
   width:100%;
-  max-width:360px;
+  max-width:250px;           /* ↓ from 360px (~30%) */
   margin:auto;
 
-  border-radius:16px;
-  border:1px solid rgba(255,255,255,.16);
+  border-radius:14px;
+  border:1px solid rgba(255,255,255,.14);
 
   background:
-    radial-gradient(520px 260px at 50% 50%, rgba(34,211,238,.22), transparent 60%),
+    radial-gradient(520px 260px at 50% 50%, rgba(34,211,238,.20), transparent 60%),
     repeating-linear-gradient(
       45deg,
       rgba(255,255,255,.06) 0 12px,
