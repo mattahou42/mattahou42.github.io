@@ -1,241 +1,169 @@
-/* =========================================================
-   THEME.CSS — Engineering / Blueprint Portfolio
-   FIX: hero fade no longer covers text
-   ========================================================= */
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Filler Name | Engineering Portfolio</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="theme.css">
+</head>
+<body>
 
-/* ------------------ VARIABLES ------------------ */
-:root{
-  --bg: #f3f8ff;            /* very light blue */
-  --bg2: #eef6ff;
+  <!-- NAV -->
+  <div class="topbar">
+    <div class="container">
+      <div class="nav">
+        <div class="brand">Filler Name</div>
+        <div class="navlinks">
+          <a href="#projects">Projects</a>
+          <a href="#resume">Resume</a>
+          <a href="#contact">Contact</a>
+        </div>
+      </div>
+    </div>
+  </div>
 
-  --text: #071225;
-  --muted: #4b5b76;
+  <!-- HERO -->
+  <section class="hero">
+    <!-- Smooth blend from dark hero into light page background -->
+    <div class="heroFade"></div>
 
-  --brandA: #061a3a;
-  --brandB: #0b4ea2;
-  --accent: #22d3ee;
+    <div class="container">
+      <div class="heroGrid">
+        <div>
+          <h1>Filler Name</h1>
+          <p class="subtitle">Filler Title Line (e.g., Mechanical Engineering Student)</p>
+          <p class="bodyText">
+            Filler paragraph text. This is where you describe what you do in a professional way:
+            design, CAD, prototyping, testing, iteration, and teamwork.
+          </p>
 
-  --border: rgba(255,255,255,0.18);
-  --card: rgba(255,255,255,0.82);
+          <p class="caption">
+            Filler caption text describing the image on the right.
+          </p>
 
-  --radius: 18px;
-  --ease: cubic-bezier(.2,.8,.2,1);
-  --dur: 260ms;
-}
+          <div class="ctaRow">
+            <a class="btn btnPrimary" href="#projects">See Projects</a>
+            <a class="btn btnGhost" href="#resume">Download Resume</a>
+          </div>
 
-/* ------------------ GLOBAL ------------------ */
-html{ scroll-behavior: smooth; }
+          <div class="pills">
+            <div class="pill">X Major Projects</div>
+            <div class="pill">Y+ Years Experience</div>
+            <div class="pill">100% Hands-on</div>
+          </div>
+        </div>
 
-body{
-  background:
-    radial-gradient(1200px 700px at 18% 8%, rgba(34,211,238,.08), transparent 60%),
-    linear-gradient(180deg, var(--bg), var(--bg2));
-  color: var(--text);
-}
+        <div class="heroCard">
+          <div class="heroImg" title="Image placeholder"></div>
+        </div>
 
-h1,h2,h3{ letter-spacing:-0.02em; }
-p{ line-height:1.65; }
-.lead,.desc{ color:var(--muted); }
+      </div>
+    </div>
+  </section>
 
-.container{ max-width:1120px; }
+  <!-- PROJECTS -->
+  <section class="section" id="projects">
+    <div class="container">
+      <h2>Featured Projects</h2>
+      <p class="lead">Click a card to view details.</p>
 
-/* ------------------ NAV ------------------ */
-.topbar{
-  background:rgba(255,255,255,.88);
-  backdrop-filter:blur(14px);
-  border-bottom:1px solid rgba(0,0,0,.08);
-}
+      <div class="grid">
+        <a class="card" href="projects/project-1.html">
+          <div class="thumb"></div>
+          <div class="cardBody">
+            <span class="badge blue">Class Project</span>
+            <div class="title">Project Title — Filler Subtitle</div>
+            <div class="metaRow">
+              <span>📅 Jan 20XX — Present</span>
+            </div>
+            <div class="tagRow">
+              <span class="tag">Tag One</span>
+              <span class="tag">Tag Two</span>
+              <span class="tag">Tag Three</span>
+            </div>
+            <p class="desc">Filler description sentence that summarizes the project at a glance.</p>
+          </div>
+        </a>
 
-.navlinks a{
-  position:relative;
-  opacity:.85;
-}
+        <a class="card" href="projects/project-2.html">
+          <div class="thumb"></div>
+          <div class="cardBody">
+            <span class="badge green">Design Team</span>
+            <div class="title">Project Title — Filler Subtitle</div>
+            <div class="metaRow">
+              <span>📅 Feb 20XX — Present</span>
+            </div>
+            <div class="tagRow">
+              <span class="tag">Tool A</span>
+              <span class="tag">Tool B</span>
+              <span class="tag">Tool C</span>
+            </div>
+            <p class="desc">Filler description sentence that summarizes the project at a glance.</p>
+          </div>
+        </a>
 
-.navlinks a::after{
-  content:"";
-  position:absolute;
-  left:0; right:0; bottom:-10px;
-  height:2px;
-  background:var(--accent);
-  transform:scaleX(0);
-  transform-origin:left;
-  transition:transform var(--dur) var(--ease);
-}
+        <a class="card" href="projects/project-3.html">
+          <div class="thumb"></div>
+          <div class="cardBody">
+            <span class="badge red">Personal Project</span>
+            <div class="title">Project Title — Filler Subtitle*</div>
+            <div class="metaRow">
+              <span>📅 Mar 20XX — Present</span>
+            </div>
+            <div class="tagRow">
+              <span class="tag">System X</span>
+              <span class="tag">System Y</span>
+              <span class="tag">Safety</span>
+            </div>
+            <p class="desc">Filler description sentence that summarizes the project at a glance.</p>
+          </div>
+        </a>
 
-.navlinks a:hover::after{ transform:scaleX(1); }
+        <a class="card" href="projects/project-4.html">
+          <div class="thumb"></div>
+          <div class="cardBody">
+            <span class="badge green">Design Team</span>
+            <div class="title">Project Title — Filler Subtitle</div>
+            <div class="metaRow">
+              <span>📅 Apr 20XX — Present</span>
+            </div>
+            <div class="tagRow">
+              <span class="tag">CAD</span>
+              <span class="tag">3D Printing</span>
+              <span class="tag">Controls</span>
+            </div>
+            <p class="desc">Filler description sentence that summarizes the project at a glance.</p>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
 
-/* =========================================================
-   HERO
-   ========================================================= */
-.hero{
-  position:relative;
-  overflow:hidden;
-  background:linear-gradient(135deg,var(--brandA),var(--brandB));
-}
+  <!-- RESUME -->
+  <section class="section" id="resume">
+    <div class="container">
+      <h2>Resume</h2>
+      <p class="lead">Filler text. Later you can upload resume.pdf and link it here.</p>
+    </div>
+  </section>
 
-/* Grid (lowest visual layer) */
-.hero::before{
-  content:"";
-  position:absolute;
-  inset:0;
-  z-index:0;
-  pointer-events:none;
-  opacity:.25;
-  background:
-    linear-gradient(to right, rgba(255,255,255,.22) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255,255,255,.22) 1px, transparent 1px);
-  background-size:36px 36px;
-}
+  <!-- CONTACT -->
+  <section class="section" id="contact">
+    <div class="container">
+      <h2>Contact</h2>
+      <p class="lead">Filler text.</p>
+      <div class="panel">
+        <p><strong>Email:</strong> filler.email@example.com</p>
+        <p><strong>LinkedIn:</strong> linkedin.com/in/filler</p>
+        <p><strong>GitHub:</strong> github.com/filler</p>
+      </div>
+    </div>
+  </section>
 
-/* Fade blend (ABOVE grid + hero bg, BELOW corners + content) */
-.hero .heroFade{
-  position:absolute;
-  left:0; right:0; bottom:0;
-  height: 140px;            /* shorter so it starts lower */
-  pointer-events:none;
-  z-index:1;
+  <div class="footer">
+    <div class="container">© 20XX Filler Name — Built with GitHub Pages</div>
+  </div>
 
-  /* Starts transparent for most of its height, only brightens near the bottom */
-  background: linear-gradient(
-    to bottom,
-    rgba(243,248,255,0) 0%,
-    rgba(243,248,255,0.00) 40%,
-    rgba(243,248,255,0.30) 65%,
-    rgba(243,248,255,0.78) 85%,
-    rgba(243,248,255,1) 100%
-  );
-}
-
-/* Corners ABOVE fade */
-.hero::after{
-  content:"";
-  position:absolute;
-  inset:0;
-  z-index:2;
-  pointer-events:none;
-
-  --c: rgba(255,255,255,.55);
-  --t: 2px;
-
-  --lt-offset: 56px;
-  --lt-length: 140px;
-
-  --rb-offset-x: 40px;
-  --rb-offset-y: 40px;
-  --rb-length: 110px;
-
-  background:
-    /* top-left */
-    linear-gradient(var(--c),var(--c))
-      left var(--lt-offset) top var(--lt-offset) / var(--lt-length) var(--t) no-repeat,
-    linear-gradient(var(--c),var(--c))
-      left var(--lt-offset) top var(--lt-offset) / var(--t) var(--lt-length) no-repeat,
-
-    /* bottom-right */
-    linear-gradient(var(--c),var(--c))
-      right var(--rb-offset-x) bottom var(--rb-offset-y) / var(--rb-length) var(--t) no-repeat,
-    linear-gradient(var(--c),var(--c))
-      right var(--rb-offset-x) bottom var(--rb-offset-y) / var(--t) var(--rb-length) no-repeat;
-}
-
-/* Content highest (so fade NEVER covers text) */
-.hero .container{
-  position:relative;
-  z-index:3;
-}
-
-/* =========================================================
-   HERO IMAGE AREA (≈30% smaller)
-   ========================================================= */
-.heroCard{
-  background:rgba(255,255,255,.05);
-  border:1px solid rgba(255,255,255,.16);
-  border-radius:var(--radius);
-  padding:11px;
-}
-
-.heroImg{
-  aspect-ratio:1 / 1;
-  width:100%;
-  max-width:250px;
-  margin:auto;
-
-  border-radius:14px;
-  border:1px solid rgba(255,255,255,.14);
-
-  background:
-    radial-gradient(520px 260px at 50% 50%, rgba(34,211,238,.20), transparent 60%),
-    repeating-linear-gradient(
-      45deg,
-      rgba(255,255,255,.06) 0 12px,
-      rgba(255,255,255,.02) 12px 24px
-    );
-}
-
-/* =========================================================
-   BUTTONS
-   ========================================================= */
-.btn{
-  border-radius:14px;
-  transition:transform var(--dur) var(--ease);
-}
-.btn:hover{ transform:translateY(-2px); }
-
-/* =========================================================
-   SECTIONS
-   ========================================================= */
-.section{
-  position:relative;
-}
-
-/* Very subtle blueprint grid so text stays crisp */
-.section::before{
-  content:"";
-  position:absolute;
-  inset:0;
-  opacity:.04;
-  background:
-    linear-gradient(to right, rgba(7,18,37,.35) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(7,18,37,.35) 1px, transparent 1px);
-  background-size:72px 72px;
-  pointer-events:none;
-}
-
-.section .container{
-  position:relative;
-  z-index:1;
-}
-
-/* =========================================================
-   CARDS
-   ========================================================= */
-.card{
-  background:var(--card);
-  border-radius:var(--radius);
-  border:1px solid rgba(0,0,0,.08);
-  transition:transform var(--dur) var(--ease);
-}
-.card:hover{ transform:translateY(-6px); }
-
-/* =========================================================
-   FOOTER
-   ========================================================= */
-.footer{
-  border-top:1px solid rgba(0,0,0,.08);
-  color:var(--muted);
-}
-
-/* =========================================================
-   MOTION
-   ========================================================= */
-@media (prefers-reduced-motion:no-preference){
-  .hero .container > *,
-  .card{
-    animation:fadeUp .6s var(--ease) both;
-  }
-}
-
-@keyframes fadeUp{
-  from{ opacity:0; transform:translateY(10px); }
-  to{ opacity:1; transform:none; }
-}
+</body>
+</html>
