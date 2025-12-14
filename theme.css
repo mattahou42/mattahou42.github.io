@@ -1,172 +1,181 @@
-/* =========================================================
-   theme.css — Blueprint/Tech skin + clean hero→projects blend
-   ========================================================= */
-
+/* ===============================
+   GLOBAL VARIABLES
+================================ */
 :root{
-  --page: #f3f8ff;          /* very light blue */
-  --page2:#eef6ff;
-  --ink:  #071225;
-
-  --heroA:#061a3a;
-  --heroB:#0b4ea2;
-
-  --radius:18px;
-  --glass: rgba(255,255,255,.06);
-  --glassBorder: rgba(255,255,255,.16);
+  --blue-dark: #061a3a;
+  --blue-mid: #0b4ea2;
+  --blue-light: #e9f2fb;
+  --blue-grid: rgba(255,255,255,0.06);
+  --white-line: rgba(255,255,255,0.7);
 }
 
-/* PAGE BACKGROUND */
-body{
-  background: linear-gradient(180deg, var(--page), var(--page2));
-  color: var(--ink);
-}
-
-/* =========================================================
-   HERO (no fade overlay on text)
-   ========================================================= */
+/* ===============================
+   HERO SECTION
+================================ */
 .hero{
   position: relative;
+  padding: 110px 0 90px;
+  background:
+    linear-gradient(to right, rgba(0,0,0,.25), rgba(0,0,0,0)),
+    linear-gradient(to bottom, var(--blue-dark), var(--blue-mid));
   overflow: hidden;
-  background: linear-gradient(135deg, var(--heroA), var(--heroB));
 }
 
-/* blueprint grid in hero */
+/* Blueprint grid overlay */
 .hero::before{
   content:"";
   position:absolute;
   inset:0;
-  z-index:0;
+  background-image:
+    linear-gradient(var(--blue-grid) 1px, transparent 1px),
+    linear-gradient(90deg, var(--blue-grid) 1px, transparent 1px);
+  background-size: 40px 40px;
   pointer-events:none;
-  opacity:.22;
-  background:
-    linear-gradient(to right, rgba(255,255,255,.22) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255,255,255,.22) 1px, transparent 1px);
-  background-size:36px 36px;
 }
 
-/* keep hero content above background */
-.hero .container{
-  position: relative;
-  z-index: 3;
-  max-width: 1120px;
-  margin: 0 auto;
-  padding-left: 24px;
-  padding-right: 24px;
-}
-
-/* lock grid so it doesn’t shift */
+/* ===============================
+   HERO CONTENT GRID
+================================ */
 .heroGrid{
-  display: grid;
+  display:grid;
   grid-template-columns: 1.1fr 0.9fr;
-  gap: 56px;
-  align-items: center;
-}
-
-@media (max-width: 900px){
-  .heroGrid{ grid-template-columns: 1fr; }
-}
-
-/* =========================================================
-   CORNER LINES (two right-angle white lines)
-   ========================================================= */
-.heroCorners{
-  position:absolute;
-  inset:0;
+  gap:80px;
+  align-items:center;
+  position:relative;
   z-index:2;
-  pointer-events:none;
 }
 
-/* top-left */
-.heroCorners::before{
-  content:"";
-  position:absolute;
-  top:56px;
-  left:56px;
-  width:140px;
-  height:140px;
-  border-top:2px solid rgba(255,255,255,.55);
-  border-left:2px solid rgba(255,255,255,.55);
+.hero h1{
+  font-size:3.2rem;
+  margin-bottom:10px;
 }
 
-/* bottom-right */
-.heroCorners::after{
-  content:"";
-  position:absolute;
-  right:48px;
-  bottom:48px;
-  width:110px;
-  height:110px;
-  border-bottom:2px solid rgba(255,255,255,.55);
-  border-right:2px solid rgba(255,255,255,.55);
+.subtitle{
+  font-weight:600;
+  opacity:.95;
+  margin-bottom:18px;
 }
 
-/* =========================================================
-   HERO IMAGE AREA (square + smaller)
-   ========================================================= */
+.bodyText{
+  max-width:520px;
+  opacity:.95;
+}
+
+/* ===============================
+   IMAGE CARD
+================================ */
 .heroCard{
-  background: var(--glass);
-  border: 1px solid var(--glassBorder);
-  border-radius: var(--radius);
-  padding: 12px;
+  position:relative;
+  display:flex;
+  justify-content:center;
+  align-items:center;
 }
 
+/* Outer glass frame */
+.heroCard::before{
+  content:"";
+  position:absolute;
+  width:360px;
+  height:360px;
+  border-radius:24px;
+  background:rgba(255,255,255,0.06);
+  backdrop-filter: blur(4px);
+}
+
+/* Inner square image placeholder */
 .heroImg{
-  aspect-ratio: 1 / 1;
-  width: 100%;
-  max-width: 260px;      /* change this if you want bigger/smaller */
-  margin: 0 auto;
-  border-radius: 14px;
-  border: 1px solid rgba(255,255,255,.14);
+  width:260px;
+  height:260px;
+  border-radius:18px;
   background:
-    radial-gradient(520px 260px at 50% 50%, rgba(255,255,255,.10), transparent 60%),
     repeating-linear-gradient(
       45deg,
-      rgba(255,255,255,.06) 0 12px,
-      rgba(255,255,255,.02) 12px 24px
+      rgba(255,255,255,.12),
+      rgba(255,255,255,.12) 10px,
+      rgba(255,255,255,.05) 10px,
+      rgba(255,255,255,.05) 20px
     );
+  z-index:1;
 }
 
-/* =========================================================
-   HERO → PROJECTS TRANSITION (the blend band)
-   ========================================================= */
+/* ===============================
+   BLUEPRINT CORNER LINES
+================================ */
+.hero::after{
+  content:"";
+  position:absolute;
+  right:60px;
+  bottom:120px;
+  width:120px;
+  height:120px;
+  border-right:2px solid var(--white-line);
+  border-bottom:2px solid var(--white-line);
+}
+
+.hero .cornerLeft{
+  position:absolute;
+  left:60px;
+  top:140px;
+  width:120px;
+  height:120px;
+  border-left:2px solid var(--white-line);
+  border-top:2px solid var(--white-line);
+}
+
+/* ===============================
+   HERO → PROJECTS FADE
+================================ */
 .heroFade{
-  height: 140px;
+  height:140px;
   background: linear-gradient(
     to bottom,
-    rgba(6,26,58,1) 0%,
-    rgba(11,78,162,.75) 20%,
-    rgba(210,228,248,.55) 55%,
-    rgba(235,245,255,.85) 80%,
-    #f3f8ff 100%
+    rgba(6,26,58,0) 0%,
+    rgba(11,78,162,.45) 30%,
+    rgba(210,228,248,.65) 70%,
+    var(--blue-light) 100%
   );
 }
 
-
-/* =========================================================
-   SECTIONS BELOW (keep readable + subtle grid)
-   ========================================================= */
-#projects.section{
-  background: #f3f8ff;
+/* ===============================
+   BUTTONS & PILLS
+================================ */
+.btn{
+  display:inline-block;
+  padding:12px 20px;
+  border-radius:12px;
+  font-weight:600;
+  transition:.2s ease;
 }
 
+.btnPrimary{
+  background:white;
+  color:#0b4ea2;
+}
+
+.btnPrimary:hover{
+  transform:translateY(-1px);
+}
+
+.btnGhost{
+  border:1px solid rgba(255,255,255,.35);
+}
+
+.pills{
+  display:flex;
+  gap:10px;
+  margin-top:22px;
+}
+
+.pill{
+  padding:8px 14px;
+  border-radius:999px;
+  background:rgba(255,255,255,.12);
+  font-size:.85rem;
+}
+
+/* ===============================
+   PROJECTS SECTION BACKGROUND
+================================ */
 .section{
-  position: relative;
-  background: transparent;
-}
-
-.section::before{
-  content:"";
-  position:absolute;
-  inset:0;
-  opacity:.04;
-  pointer-events:none;
-  background:
-    linear-gradient(to right, rgba(7,18,37,.35) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(7,18,37,.35) 1px, transparent 1px);
-  background-size:72px 72px;
-}
-
-.section .container{
-  position: relative;
-  z-index: 1;
+  background:var(--blue-light);
 }
