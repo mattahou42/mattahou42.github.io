@@ -1,6 +1,6 @@
 /* =========================================================
    THEME.CSS — Sleek / Blueprint Engineering Portfolio
-   FULL REPLACEMENT FILE
+   FULL INTEGRATED VERSION
    ========================================================= */
 
 /* ------------------ DESIGN TOKENS ------------------ */
@@ -9,9 +9,9 @@
   --text: #071225;
   --muted: #4b5b76;
 
-  --brandA: #071a3a;   /* deep navy */
-  --brandB: #0b4ea2;   /* blueprint blue */
-  --accent: #22d3ee;   /* cyan */
+  --brandA: #071a3a;
+  --brandB: #0b4ea2;
+  --accent: #22d3ee;
 
   --card: rgba(255,255,255,0.78);
   --border: rgba(7,18,37,0.12);
@@ -20,41 +20,27 @@
   --shadow-lg: 0 22px 70px rgba(2,6,23,0.18);
 
   --radius: 18px;
-
   --ease: cubic-bezier(.2,.8,.2,1);
   --dur: 260ms;
 }
 
-/* ------------------ GLOBAL BASE ------------------ */
-html{
-  scroll-behavior: smooth;
-}
+/* ------------------ GLOBAL ------------------ */
+html{ scroll-behavior: smooth; }
 
 body{
   background:
     radial-gradient(1200px 600px at 15% 10%, rgba(34,211,238,0.08), transparent 60%),
     linear-gradient(180deg, var(--bg), #eef3fb);
   color: var(--text);
-  letter-spacing: -0.01em;
 }
 
-h1, h2, h3{
-  letter-spacing: -0.02em;
-}
+h1,h2,h3{ letter-spacing: -0.02em; }
+p{ line-height: 1.65; }
+.lead,.desc{ color: var(--muted); }
 
-p{
-  line-height: 1.65;
-}
+.container{ max-width: 1120px; }
 
-.lead, .desc{
-  color: var(--muted);
-}
-
-.container{
-  max-width: 1120px;
-}
-
-/* ------------------ NAVIGATION ------------------ */
+/* ------------------ NAV ------------------ */
 .topbar{
   background: rgba(255,255,255,0.88);
   backdrop-filter: blur(14px);
@@ -63,30 +49,24 @@ p{
 
 .navlinks a{
   position: relative;
-  opacity: 0.85;
+  opacity: .85;
   transition: opacity var(--dur) var(--ease);
 }
 
-.navlinks a:hover{
-  opacity: 1;
-}
+.navlinks a:hover{ opacity: 1; }
 
 .navlinks a::after{
   content:"";
   position:absolute;
-  left:0;
-  right:0;
-  bottom:-10px;
+  left:0; right:0; bottom:-10px;
   height:2px;
-  background: rgba(34,211,238,0.7);
+  background: rgba(34,211,238,.7);
   transform: scaleX(0);
   transform-origin: left;
   transition: transform var(--dur) var(--ease);
 }
 
-.navlinks a:hover::after{
-  transform: scaleX(1);
-}
+.navlinks a:hover::after{ transform: scaleX(1); }
 
 /* ------------------ HERO ------------------ */
 .hero{
@@ -95,92 +75,91 @@ p{
   background: linear-gradient(135deg, var(--brandA), var(--brandB));
 }
 
-/* Blueprint grid overlay */
+/* Blueprint grid */
 .hero::before{
   content:"";
   position:absolute;
-  inset:-2px;
-  opacity: 0.22;
+  inset:0;
+  opacity:.25;
   background:
-    linear-gradient(to right, rgba(255,255,255,0.22) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255,255,255,0.22) 1px, transparent 1px);
+    linear-gradient(to right, rgba(255,255,255,.2) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255,255,255,.2) 1px, transparent 1px);
   background-size: 36px 36px;
-  mask-image: radial-gradient(circle at 22% 30%, rgba(0,0,0,1), rgba(0,0,0,0) 70%);
   pointer-events:none;
 }
 
-/* ------------------ BLUEPRINT CORNER FRAME ------------------ */
-/* (MOVED FARTHER OUT — THIS IS THE FIX) */
-
+/* Hero content ABOVE everything */
 .hero .container{
   position: relative;
+  z-index: 2;
 }
 
-.hero .container::before,
-.hero .container::after{
+/* ------------------ HERO FRAME (BEHIND CONTENT) ------------------ */
+.hero::after,
+.hero::before{
   content:"";
   position:absolute;
   width: 140px;
   height: 140px;
-  border-color: rgba(255,255,255,0.55);
+  border-color: rgba(255,255,255,.55);
   pointer-events:none;
+  z-index: 1;
 }
 
-.hero .container::before{
+/* top-left */
+.hero::before{
   top: 48px;
   left: 48px;
   border-top: 2px solid;
   border-left: 2px solid;
 }
 
-.hero .container::after{
+/* bottom-right */
+.hero::after{
   bottom: 48px;
   right: 48px;
   border-bottom: 2px solid;
   border-right: 2px solid;
 }
 
-/* ------------------ HERO IMAGE (PERFECT SQUARE) ------------------ */
+/* ------------------ HERO IMAGE ------------------ */
 .heroCard{
-  background: rgba(255,255,255,0.06);
-  border: 1px solid rgba(255,255,255,0.18);
+  background: rgba(255,255,255,.06);
+  border: 1px solid rgba(255,255,255,.18);
   border-radius: var(--radius);
   padding: 16px;
-  box-shadow: 0 20px 80px rgba(2,6,23,0.35);
+  box-shadow: 0 20px 80px rgba(2,6,23,.35);
 }
 
 .heroImg{
-  aspect-ratio: 1 / 1;      /* square for headshot */
+  aspect-ratio: 1 / 1;
   width: 100%;
   max-width: 360px;
   margin: auto;
-
   border-radius: 16px;
-  border: 1px solid rgba(255,255,255,0.16);
+  border: 1px solid rgba(255,255,255,.16);
 
   background:
-    radial-gradient(520px 260px at 50% 50%, rgba(34,211,238,0.22), rgba(34,211,238,0) 60%),
+    radial-gradient(520px 260px at 50% 50%, rgba(34,211,238,.22), transparent 60%),
     repeating-linear-gradient(
       45deg,
-      rgba(255,255,255,0.06) 0 12px,
-      rgba(255,255,255,0.02) 12px 24px
+      rgba(255,255,255,.06) 0 12px,
+      rgba(255,255,255,.02) 12px 24px
     );
 
   box-shadow:
-    inset 0 0 0 1px rgba(255,255,255,0.12),
-    0 18px 60px rgba(2,6,23,0.35);
+    inset 0 0 0 1px rgba(255,255,255,.12),
+    0 18px 60px rgba(2,6,23,.35);
 }
 
 /* ------------------ BUTTONS ------------------ */
 .btn{
   border-radius: 14px;
-  transition:
-    transform var(--dur) var(--ease),
-    box-shadow var(--dur) var(--ease);
+  transition: transform var(--dur) var(--ease), box-shadow var(--dur) var(--ease);
 }
 
 .btnPrimary{
-  background: rgba(255,255,255,0.95);
+  background: rgba(255,255,255,.95);
   color: var(--brandA);
   box-shadow: var(--shadow-sm);
 }
@@ -191,13 +170,11 @@ p{
 }
 
 .btnGhost{
-  background: rgba(255,255,255,0.06);
-  border: 1px solid rgba(255,255,255,0.28);
+  background: rgba(255,255,255,.06);
+  border: 1px solid rgba(255,255,255,.28);
 }
 
-.btnGhost:hover{
-  transform: translateY(-2px);
-}
+.btnGhost:hover{ transform: translateY(-2px); }
 
 /* ------------------ SECTIONS ------------------ */
 .section{
@@ -208,10 +185,10 @@ p{
   content:"";
   position:absolute;
   inset:0;
-  opacity: 0.03;
+  opacity:.03;
   background:
-    linear-gradient(to right, rgba(7,18,37,1) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(7,18,37,1) 1px, transparent 1px);
+    linear-gradient(to right, #071225 1px, transparent 1px),
+    linear-gradient(to bottom, #071225 1px, transparent 1px);
   background-size: 72px 72px;
   pointer-events:none;
 }
@@ -225,12 +202,10 @@ p{
 .section h2::after{
   content:"";
   position:absolute;
-  left:0;
-  bottom:0;
+  left:0; bottom:0;
   width: 60%;
   height: 2px;
-  background: rgba(34,211,238,0.7);
-  border-radius: 999px;
+  background: rgba(34,211,238,.7);
 }
 
 /* ------------------ CARDS ------------------ */
@@ -241,22 +216,16 @@ p{
   box-shadow: var(--shadow-sm);
   position: relative;
   overflow: hidden;
-  transition:
-    transform var(--dur) var(--ease),
-    box-shadow var(--dur) var(--ease);
+  transition: transform var(--dur) var(--ease), box-shadow var(--dur) var(--ease);
 }
 
 .card::before{
   content:"";
   position:absolute;
   inset:0;
-  opacity: 0;
-  background:
-    linear-gradient(90deg,
-      rgba(34,211,238,0.35),
-      rgba(34,211,238,0) 60%);
+  opacity:0;
+  background: linear-gradient(90deg, rgba(34,211,238,.35), transparent 60%);
   transition: opacity var(--dur) var(--ease);
-  pointer-events:none;
 }
 
 .card:hover{
@@ -264,29 +233,7 @@ p{
   box-shadow: var(--shadow-lg);
 }
 
-.card:hover::before{
-  opacity: 0.22;
-}
-
-.thumb{
-  background:
-    radial-gradient(650px 240px at 20% 50%, rgba(34,211,238,0.26), rgba(34,211,238,0) 58%),
-    linear-gradient(135deg, rgba(7,18,37,0.06), rgba(7,18,37,0.02));
-}
-
-/* ------------------ BADGES & PILLS ------------------ */
-.badge{
-  border-radius: 999px;
-  padding: 6px 10px;
-  font-weight: 800;
-  border: 1px solid rgba(7,18,37,0.12);
-  background: rgba(255,255,255,0.62);
-}
-
-.pill{
-  background: rgba(255,255,255,0.08);
-  border: 1px solid rgba(255,255,255,0.14);
-}
+.card:hover::before{ opacity:.22; }
 
 /* ------------------ FOOTER ------------------ */
 .footer{
@@ -294,28 +241,17 @@ p{
   color: var(--muted);
 }
 
-/* ------------------ MOTION ------------------ */
+/* ------------------ ANIMATION ------------------ */
 @media (prefers-reduced-motion: no-preference){
   .heroGrid > div,
   .heroCard,
   .section h2,
-  .section .lead,
   .grid .card{
     animation: fadeUp 520ms var(--ease) both;
   }
-
-  .grid .card:nth-child(2){ animation-delay: 60ms; }
-  .grid .card:nth-child(3){ animation-delay: 120ms; }
-  .grid .card:nth-child(4){ animation-delay: 180ms; }
 }
 
 @keyframes fadeUp{
-  from{
-    opacity: 0;
-    transform: translateY(10px);
-  }
-  to{
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from{ opacity:0; transform: translateY(10px); }
+  to{ opacity:1; transform: translateY(0); }
 }
