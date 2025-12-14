@@ -1,23 +1,20 @@
 /* =========================================================
-   THEME.CSS — Sleek / Blueprint Engineering Portfolio
-   FULL INTEGRATED VERSION
+   THEME.CSS — Engineering / Blueprint Portfolio
+   FULL REPLACEMENT FILE
    ========================================================= */
 
-/* ------------------ DESIGN TOKENS ------------------ */
+/* ------------------ VARIABLES ------------------ */
 :root{
   --bg: #f6f8fc;
   --text: #071225;
   --muted: #4b5b76;
 
-  --brandA: #071a3a;
+  --brandA: #061a3a;
   --brandB: #0b4ea2;
   --accent: #22d3ee;
 
+  --border: rgba(255,255,255,0.18);
   --card: rgba(255,255,255,0.78);
-  --border: rgba(7,18,37,0.12);
-
-  --shadow-sm: 0 10px 28px rgba(2,6,23,0.08);
-  --shadow-lg: 0 22px 70px rgba(2,6,23,0.18);
 
   --radius: 18px;
   --ease: cubic-bezier(.2,.8,.2,1);
@@ -29,115 +26,121 @@ html{ scroll-behavior: smooth; }
 
 body{
   background:
-    radial-gradient(1200px 600px at 15% 10%, rgba(34,211,238,0.08), transparent 60%),
+    radial-gradient(1200px 600px at 15% 10%, rgba(34,211,238,.08), transparent 60%),
     linear-gradient(180deg, var(--bg), #eef3fb);
   color: var(--text);
 }
 
-h1,h2,h3{ letter-spacing: -0.02em; }
-p{ line-height: 1.65; }
-.lead,.desc{ color: var(--muted); }
+h1,h2,h3{ letter-spacing:-0.02em; }
+p{ line-height:1.65; }
+.lead,.desc{ color:var(--muted); }
 
-.container{ max-width: 1120px; }
+.container{ max-width:1120px; }
 
 /* ------------------ NAV ------------------ */
 .topbar{
-  background: rgba(255,255,255,0.88);
-  backdrop-filter: blur(14px);
-  border-bottom: 1px solid var(--border);
+  background:rgba(255,255,255,.88);
+  backdrop-filter:blur(14px);
+  border-bottom:1px solid rgba(0,0,0,.08);
 }
 
 .navlinks a{
-  position: relative;
-  opacity: .85;
-  transition: opacity var(--dur) var(--ease);
+  position:relative;
+  opacity:.85;
 }
-
-.navlinks a:hover{ opacity: 1; }
 
 .navlinks a::after{
   content:"";
   position:absolute;
   left:0; right:0; bottom:-10px;
   height:2px;
-  background: rgba(34,211,238,.7);
-  transform: scaleX(0);
-  transform-origin: left;
-  transition: transform var(--dur) var(--ease);
+  background:var(--accent);
+  transform:scaleX(0);
+  transform-origin:left;
+  transition:transform var(--dur) var(--ease);
 }
 
-.navlinks a:hover::after{ transform: scaleX(1); }
+.navlinks a:hover::after{
+  transform:scaleX(1);
+}
 
-/* ------------------ HERO ------------------ */
+/* =========================================================
+   HERO
+   ========================================================= */
 .hero{
-  position: relative;
-  overflow: hidden;
-  background: linear-gradient(135deg, var(--brandA), var(--brandB));
+  position:relative;
+  overflow:hidden;
+  background:linear-gradient(135deg,var(--brandA),var(--brandB));
 }
 
-/* Blueprint grid */
+/* Blueprint grid (layer 0) */
 .hero::before{
   content:"";
   position:absolute;
   inset:0;
+  z-index:0;
+  pointer-events:none;
   opacity:.25;
   background:
-    linear-gradient(to right, rgba(255,255,255,.2) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255,255,255,.2) 1px, transparent 1px);
-  background-size: 36px 36px;
-  pointer-events:none;
+    linear-gradient(to right, rgba(255,255,255,.22) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255,255,255,.22) 1px, transparent 1px);
+  background-size:36px 36px;
 }
 
 /* Hero content ABOVE everything */
 .hero .container{
-  position: relative;
-  z-index: 2;
+  position:relative;
+  z-index:2;
 }
 
-/* ------------------ HERO FRAME (BEHIND CONTENT) ------------------ */
-.hero::after,
-.hero::before{
+/* =========================================================
+   BLUEPRINT CORNERS (layer 1, BEHIND CONTENT)
+   ========================================================= */
+.hero::after{
   content:"";
   position:absolute;
-  width: 140px;
-  height: 140px;
-  border-color: rgba(255,255,255,.55);
+  inset:0;
+  z-index:1;
   pointer-events:none;
-  z-index: 1;
+
+  /* Corner parameters */
+  --c: rgba(255,255,255,.55);
+  --t: 2px;
+  --L: 140px;
+  --m: 56px;   /* DISTANCE FROM CONTENT / EDGES */
+
+  background:
+    /* Top-left */
+    linear-gradient(var(--c),var(--c))
+      left var(--m) top var(--m) / var(--L) var(--t) no-repeat,
+    linear-gradient(var(--c),var(--c))
+      left var(--m) top var(--m) / var(--t) var(--L) no-repeat,
+
+    /* Bottom-right */
+    linear-gradient(var(--c),var(--c))
+      right var(--m) bottom var(--m) / var(--L) var(--t) no-repeat,
+    linear-gradient(var(--c),var(--c))
+      right var(--m) bottom var(--m) / var(--t) var(--L) no-repeat;
 }
 
-/* top-left */
-.hero::before{
-  top: 48px;
-  left: 48px;
-  border-top: 2px solid;
-  border-left: 2px solid;
-}
-
-/* bottom-right */
-.hero::after{
-  bottom: 48px;
-  right: 48px;
-  border-bottom: 2px solid;
-  border-right: 2px solid;
-}
-
-/* ------------------ HERO IMAGE ------------------ */
+/* =========================================================
+   HERO IMAGE (PERFECT SQUARE)
+   ========================================================= */
 .heroCard{
-  background: rgba(255,255,255,.06);
-  border: 1px solid rgba(255,255,255,.18);
-  border-radius: var(--radius);
-  padding: 16px;
-  box-shadow: 0 20px 80px rgba(2,6,23,.35);
+  background:rgba(255,255,255,.06);
+  border:1px solid rgba(255,255,255,.18);
+  border-radius:var(--radius);
+  padding:16px;
 }
 
 .heroImg{
-  aspect-ratio: 1 / 1;
-  width: 100%;
-  max-width: 360px;
-  margin: auto;
-  border-radius: 16px;
-  border: 1px solid rgba(255,255,255,.16);
+  aspect-ratio:1 / 1;
+  width:100%;
+  max-width:360px;
+  margin:auto;
+
+  border-radius:16px;
+  border:1px solid rgba(255,255,255,.16);
 
   background:
     radial-gradient(520px 260px at 50% 50%, rgba(34,211,238,.22), transparent 60%),
@@ -146,39 +149,25 @@ p{ line-height: 1.65; }
       rgba(255,255,255,.06) 0 12px,
       rgba(255,255,255,.02) 12px 24px
     );
-
-  box-shadow:
-    inset 0 0 0 1px rgba(255,255,255,.12),
-    0 18px 60px rgba(2,6,23,.35);
 }
 
-/* ------------------ BUTTONS ------------------ */
+/* =========================================================
+   BUTTONS
+   ========================================================= */
 .btn{
-  border-radius: 14px;
-  transition: transform var(--dur) var(--ease), box-shadow var(--dur) var(--ease);
+  border-radius:14px;
+  transition:transform var(--dur) var(--ease);
 }
 
-.btnPrimary{
-  background: rgba(255,255,255,.95);
-  color: var(--brandA);
-  box-shadow: var(--shadow-sm);
+.btn:hover{
+  transform:translateY(-2px);
 }
 
-.btnPrimary:hover{
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-lg);
-}
-
-.btnGhost{
-  background: rgba(255,255,255,.06);
-  border: 1px solid rgba(255,255,255,.28);
-}
-
-.btnGhost:hover{ transform: translateY(-2px); }
-
-/* ------------------ SECTIONS ------------------ */
+/* =========================================================
+   SECTIONS
+   ========================================================= */
 .section{
-  position: relative;
+  position:relative;
 }
 
 .section::before{
@@ -189,69 +178,43 @@ p{ line-height: 1.65; }
   background:
     linear-gradient(to right, #071225 1px, transparent 1px),
     linear-gradient(to bottom, #071225 1px, transparent 1px);
-  background-size: 72px 72px;
+  background-size:72px 72px;
   pointer-events:none;
 }
 
-.section h2{
-  position: relative;
-  display: inline-block;
-  padding-bottom: 10px;
-}
-
-.section h2::after{
-  content:"";
-  position:absolute;
-  left:0; bottom:0;
-  width: 60%;
-  height: 2px;
-  background: rgba(34,211,238,.7);
-}
-
-/* ------------------ CARDS ------------------ */
+/* =========================================================
+   CARDS
+   ========================================================= */
 .card{
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  box-shadow: var(--shadow-sm);
-  position: relative;
-  overflow: hidden;
-  transition: transform var(--dur) var(--ease), box-shadow var(--dur) var(--ease);
-}
-
-.card::before{
-  content:"";
-  position:absolute;
-  inset:0;
-  opacity:0;
-  background: linear-gradient(90deg, rgba(34,211,238,.35), transparent 60%);
-  transition: opacity var(--dur) var(--ease);
+  background:var(--card);
+  border-radius:var(--radius);
+  border:1px solid rgba(0,0,0,.08);
+  transition:transform var(--dur) var(--ease);
 }
 
 .card:hover{
-  transform: translateY(-6px);
-  box-shadow: var(--shadow-lg);
+  transform:translateY(-6px);
 }
 
-.card:hover::before{ opacity:.22; }
-
-/* ------------------ FOOTER ------------------ */
+/* =========================================================
+   FOOTER
+   ========================================================= */
 .footer{
-  border-top: 1px solid var(--border);
-  color: var(--muted);
+  border-top:1px solid rgba(0,0,0,.08);
+  color:var(--muted);
 }
 
-/* ------------------ ANIMATION ------------------ */
-@media (prefers-reduced-motion: no-preference){
-  .heroGrid > div,
-  .heroCard,
-  .section h2,
-  .grid .card{
-    animation: fadeUp 520ms var(--ease) both;
+/* =========================================================
+   MOTION
+   ========================================================= */
+@media (prefers-reduced-motion:no-preference){
+  .hero .container > *,
+  .card{
+    animation:fadeUp .6s var(--ease) both;
   }
 }
 
 @keyframes fadeUp{
-  from{ opacity:0; transform: translateY(10px); }
-  to{ opacity:1; transform: translateY(0); }
+  from{ opacity:0; transform:translateY(10px); }
+  to{ opacity:1; transform:none; }
 }
