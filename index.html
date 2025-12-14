@@ -24,18 +24,16 @@
   </div>
 
   <!-- HERO -->
- <section class="hero">
-  <div class="heroCorners"></div>
-
-  <div class="container">
-    <!-- everything else stays exactly the same -->
-
+  <section class="hero">
+    <!-- corner lines (non-layout element) -->
+    <div class="heroCorners"></div>
 
     <div class="container">
       <div class="heroGrid">
         <div>
           <h1>Filler Name</h1>
           <p class="subtitle">Filler Title Line (e.g., Mechanical Engineering Student)</p>
+
           <p class="bodyText">
             Filler paragraph text. This is where you describe what you do in a professional way:
             design, CAD, prototyping, testing, iteration, and teamwork.
@@ -60,10 +58,12 @@
         <div class="heroCard">
           <div class="heroImg" title="Image placeholder"></div>
         </div>
-
       </div>
     </div>
   </section>
+
+  <!-- HERO → PROJECTS TRANSITION (this is the blend band) -->
+  <section class="heroFade" aria-hidden="true"></section>
 
   <!-- PROJECTS -->
   <section class="section" id="projects">
@@ -77,9 +77,7 @@
           <div class="cardBody">
             <span class="badge blue">Class Project</span>
             <div class="title">Project Title — Filler Subtitle</div>
-            <div class="metaRow">
-              <span>📅 Jan 20XX — Present</span>
-            </div>
+            <div class="metaRow"><span>📅 Jan 20XX — Present</span></div>
             <div class="tagRow">
               <span class="tag">Tag One</span>
               <span class="tag">Tag Two</span>
@@ -94,9 +92,7 @@
           <div class="cardBody">
             <span class="badge green">Design Team</span>
             <div class="title">Project Title — Filler Subtitle</div>
-            <div class="metaRow">
-              <span>📅 Feb 20XX — Present</span>
-            </div>
+            <div class="metaRow"><span>📅 Feb 20XX — Present</span></div>
             <div class="tagRow">
               <span class="tag">Tool A</span>
               <span class="tag">Tool B</span>
@@ -111,9 +107,7 @@
           <div class="cardBody">
             <span class="badge red">Personal Project</span>
             <div class="title">Project Title — Filler Subtitle*</div>
-            <div class="metaRow">
-              <span>📅 Mar 20XX — Present</span>
-            </div>
+            <div class="metaRow"><span>📅 Mar 20XX — Present</span></div>
             <div class="tagRow">
               <span class="tag">System X</span>
               <span class="tag">System Y</span>
@@ -128,9 +122,7 @@
           <div class="cardBody">
             <span class="badge green">Design Team</span>
             <div class="title">Project Title — Filler Subtitle</div>
-            <div class="metaRow">
-              <span>📅 Apr 20XX — Present</span>
-            </div>
+            <div class="metaRow"><span>📅 Apr 20XX — Present</span></div>
             <div class="tagRow">
               <span class="tag">CAD</span>
               <span class="tag">3D Printing</span>
