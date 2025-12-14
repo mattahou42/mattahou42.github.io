@@ -1,6 +1,6 @@
 /* =========================================================
    THEME.CSS — Engineering / Blueprint Portfolio
-   FULL REPLACEMENT FILE
+   FINAL STABLE VERSION
    ========================================================= */
 
 /* ------------------ VARIABLES ------------------ */
@@ -73,7 +73,7 @@ p{ line-height:1.65; }
   background:linear-gradient(135deg,var(--brandA),var(--brandB));
 }
 
-/* Blueprint grid (layer 0) */
+/* Blueprint grid */
 .hero::before{
   content:"";
   position:absolute;
@@ -87,14 +87,14 @@ p{ line-height:1.65; }
   background-size:36px 36px;
 }
 
-/* Hero content ABOVE everything */
+/* Content ABOVE overlays */
 .hero .container{
   position:relative;
   z-index:2;
 }
 
 /* =========================================================
-   BLUEPRINT CORNERS (layer 1, BEHIND CONTENT)
+   BLUEPRINT CORNERS (SEPARATE CONTROL)
    ========================================================= */
 .hero::after{
   content:"";
@@ -103,28 +103,34 @@ p{ line-height:1.65; }
   z-index:1;
   pointer-events:none;
 
-  /* Corner parameters */
+  /* Left/top corner tuning */
+  --lt-offset: 56px;
+  --lt-length: 140px;
+
+  /* Right/bottom corner tuning (THIS IS THE FIX) */
+  --rb-offset-x: 32px;
+  --rb-offset-y: 32px;
+  --rb-length: 120px;
+
   --c: rgba(255,255,255,.55);
   --t: 2px;
-  --L: 140px;
-  --m: 56px;   /* DISTANCE FROM CONTENT / EDGES */
 
   background:
-    /* Top-left */
+    /* TOP-LEFT */
     linear-gradient(var(--c),var(--c))
-      left var(--m) top var(--m) / var(--L) var(--t) no-repeat,
+      left var(--lt-offset) top var(--lt-offset) / var(--lt-length) var(--t) no-repeat,
     linear-gradient(var(--c),var(--c))
-      left var(--m) top var(--m) / var(--t) var(--L) no-repeat,
+      left var(--lt-offset) top var(--lt-offset) / var(--t) var(--lt-length) no-repeat,
 
-    /* Bottom-right */
+    /* BOTTOM-RIGHT (independently controlled) */
     linear-gradient(var(--c),var(--c))
-      right var(--m) bottom var(--m) / var(--L) var(--t) no-repeat,
+      right var(--rb-offset-x) bottom var(--rb-offset-y) / var(--rb-length) var(--t) no-repeat,
     linear-gradient(var(--c),var(--c))
-      right var(--m) bottom var(--m) / var(--t) var(--L) no-repeat;
+      right var(--rb-offset-x) bottom var(--rb-offset-y) / var(--t) var(--rb-length) no-repeat;
 }
 
 /* =========================================================
-   HERO IMAGE (PERFECT SQUARE)
+   HERO IMAGE (SQUARE)
    ========================================================= */
 .heroCard{
   background:rgba(255,255,255,.06);
