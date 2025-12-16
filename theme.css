@@ -16,6 +16,8 @@ body {
   position: relative;
   min-height: 88vh;
   background: linear-gradient(135deg, #071c36 0%, #0b3b7a 100%);
+  border-bottom-left-radius: 48px;
+  border-bottom-right-radius: 48px;
   overflow: hidden;
 }
 
@@ -28,11 +30,6 @@ body {
     linear-gradient(rgba(255,255,255,0.07) 1px, transparent 1px),
     linear-gradient(90deg, rgba(255,255,255,0.07) 1px, transparent 1px);
   background-size: 40px 40px;
-  mask-image: linear-gradient(
-    to bottom,
-    black 70%,
-    transparent 100%
-  );
   pointer-events: none;
   z-index: 0;
 }
@@ -46,5 +43,6 @@ body {
 /* ===== SECTIONS ===== */
 .section {
   background: #eef6ff;
-  padding: 90px 0;
+  margin-top: -32px;
+  padding: 110px 0 90px;
 }
