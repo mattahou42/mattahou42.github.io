@@ -1,23 +1,27 @@
 /* =====================================================
-   RESET / BASE
+   THEME.CSS — Subtle transition + grid dissolves near bottom
    ===================================================== */
+
 *{ box-sizing:border-box; margin:0; padding:0; }
 html{ scroll-behavior:smooth; }
 
 :root{
   --heroA:#071c36;
   --heroB:#0b3b7a;
-  --light:#eef6ff;          /* your “grey” but light-blue */
+  --light:#eef6ff;              /* very light blue (replaces gray look) */
+  --ink:#0b1a2a;
+  --inkSoft:#4b5f76;
+
   --grid:rgba(255,255,255,.085);
 
-  --fadePx:40px;            /* small fade (30–60px is good) */
-  --gridDissolvePx:130px;   /* how far from bottom grid fades out */
+  --fadePx:40px;                /* subtle fade size (30–60px) */
+  --gridDissolvePx:140px;        /* how far from bottom grid dissolves */
 }
 
 body{
   font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
   background: var(--light);
-  color:#0b1a2a;
+  color: var(--ink);
 }
 
 .container{
@@ -25,36 +29,35 @@ body{
   margin-inline:auto;
 }
 
-/* =====================================================
-   NAV
-   ===================================================== */
+/* ===================== NAV ===================== */
 .topbar{
   position:sticky;
   top:0;
   z-index:50;
-  background:rgba(245,248,255,.9);
+  background:rgba(245,248,255,.92);
   backdrop-filter: blur(8px);
   border-bottom:1px solid rgba(10,30,80,.08);
 }
+
 .nav{
   display:flex;
   align-items:center;
   justify-content:space-between;
   padding:14px 0;
 }
-.brand{ font-weight:700; }
+
+.brand{ font-weight:800; letter-spacing:.2px; }
+
 .navlinks a{
   margin-left:18px;
   text-decoration:none;
   color:#1a2b3c;
-  font-weight:600;
+  font-weight:650;
   opacity:.8;
 }
 .navlinks a:hover{ opacity:1; }
 
-/* =====================================================
-   HERO
-   ===================================================== */
+/* ===================== HERO ===================== */
 .hero{
   position:relative;
   padding:80px 0 96px;
@@ -63,7 +66,7 @@ body{
   background: linear-gradient(135deg, var(--heroA) 0%, var(--heroB) 100%);
 }
 
-/* Blueprint grid (with dissolve near bottom) */
+/* Blueprint grid (dissolves near bottom) */
 .hero::before{
   content:"";
   position:absolute;
@@ -76,7 +79,7 @@ body{
     linear-gradient(90deg, var(--grid) 1px, transparent 1px);
   background-size:40px 40px;
 
-  /* Fade the grid OUT near the bottom so it doesn't hard-cut */
+  /* dissolve grid so it ends naturally */
   -webkit-mask-image: linear-gradient(
     to bottom,
     rgba(0,0,0,1) 0%,
@@ -91,7 +94,7 @@ body{
   );
 }
 
-/* Small, subtle fade into the next section color */
+/* Very small fade into the next section color */
 .hero::after{
   content:"";
   position:absolute;
@@ -106,10 +109,8 @@ body{
   );
 }
 
-/* Keep content above visuals */
 .hero .container{ position:relative; z-index:2; }
 
-/* Hero layout */
 .heroGrid{
   display:grid;
   grid-template-columns: 1.1fr .9fr;
@@ -127,7 +128,7 @@ body{
   margin-bottom:10px;
 }
 .subtitle{
-  font-weight:700;
+  font-weight:750;
   margin-bottom:16px;
   opacity:.95;
 }
@@ -152,8 +153,11 @@ body{
 .btn{
   padding:10px 18px;
   border-radius:12px;
-  font-weight:700;
+  font-weight:750;
   text-decoration:none;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
 }
 .btnPrimary{ background:#fff; color:#07214a; }
 .btnGhost{ border:1px solid rgba(255,255,255,.35); color:#fff; }
@@ -164,7 +168,7 @@ body{
   padding:8px 12px;
   border-radius:999px;
   background:rgba(255,255,255,.12);
-  font-weight:700;
+  font-weight:750;
   font-size:.85rem;
 }
 
@@ -192,17 +196,90 @@ body{
     );
 }
 
-/* =====================================================
-   SECTIONS BELOW HERO
-   ===================================================== */
+/* ===================== SECTIONS ===================== */
 .section{
   padding:64px 0;
   background: var(--light); /* must match hero fade target */
 }
-h2{ margin-bottom:8px; font-size:32px; }
-.lead{ margin-bottom:20px; color:#4b5f76; }
 
-/* Footer */
+h2{ margin-bottom:8px; font-size:32px; }
+.lead{ margin-bottom:20px; color: var(--inkSoft); }
+
+/* Project cards (simple + clean) */
+.grid{
+  display:grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+@media (max-width: 760px){
+  .grid{ grid-template-columns: 1fr; }
+}
+
+.card{
+  display:block;
+  text-decoration:none;
+  color: inherit;
+  background: rgba(255,255,255,.92);
+  border:1px solid rgba(10,30,80,.10);
+  border-radius: 18px;
+  overflow:hidden;
+  box-shadow: 0 14px 30px rgba(0,0,0,.08);
+  transition: transform .18s ease, box-shadow .18s ease;
+}
+.card:hover{
+  transform: translateY(-4px);
+  box-shadow: 0 18px 40px rgba(0,0,0,.12);
+}
+
+.thumb{
+  height: 150px;
+  background: linear-gradient(135deg, rgba(80,180,255,.35), rgba(80,180,255,.12));
+}
+
+.cardBody{ padding: 14px 14px 16px; }
+
+.badge{
+  display:inline-block;
+  padding: 6px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 800;
+  margin-bottom: 10px;
+}
+.badge.blue{ background: rgba(50,120,255,.12); color: #1f55d8; }
+.badge.green{ background: rgba(40,200,120,.14); color: #0e7a43; }
+.badge.red{ background: rgba(255,80,80,.12); color: #b32727; }
+
+.title{ font-weight: 900; margin: 0 0 8px; letter-spacing:-.2px; }
+.metaRow{ color:#50657a; font-size:13px; margin-bottom:10px; }
+
+.tagRow{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+  margin-bottom:10px;
+}
+.tag{
+  font-size: 12px;
+  font-weight: 750;
+  padding: 6px 9px;
+  border-radius: 999px;
+  background: rgba(10,30,80,.06);
+  border: 1px solid rgba(10,30,80,.08);
+  color: #2b3f55;
+}
+
+.desc{ margin:0; color:#3e5268; line-height:1.55; }
+
+/* Panels + footer */
+.panel{
+  background: rgba(255,255,255,.9);
+  border: 1px solid rgba(10,30,80,.10);
+  border-radius: 18px;
+  padding: 18px;
+  box-shadow: 0 12px 26px rgba(0,0,0,.06);
+}
+
 .footer{
   padding:28px 0;
   text-align:center;
