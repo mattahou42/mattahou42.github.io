@@ -15,8 +15,7 @@ body {
 .hero {
   position: relative;
   min-height: 88vh;
-  background:
-    linear-gradient(135deg, #071c36 0%, #0b3b7a 100%);
+  background: linear-gradient(135deg, #071c36 0%, #0b3b7a 100%);
   overflow: hidden;
 }
 
@@ -29,27 +28,16 @@ body {
     linear-gradient(rgba(255,255,255,0.07) 1px, transparent 1px),
     linear-gradient(90deg, rgba(255,255,255,0.07) 1px, transparent 1px);
   background-size: 40px 40px;
+  mask-image: linear-gradient(
+    to bottom,
+    black 70%,
+    transparent 100%
+  );
   pointer-events: none;
   z-index: 0;
 }
 
-/* Fade into light blue */
-.hero::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  height: 90px;
-  background: linear-gradient(
-    to bottom,
-    rgba(238,246,255,0) 0%,
-    rgba(238,246,255,1) 100%
-  );
-  z-index: 1;
-}
-
-/* Content above background */
+/* Content */
 .hero * {
   position: relative;
   z-index: 2;
