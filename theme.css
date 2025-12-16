@@ -1,48 +1,212 @@
-/* ===== RESET ===== */
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
+/* =====================================================
+   RESET / BASE
+   ===================================================== */
+*{ box-sizing:border-box; margin:0; padding:0; }
+html{ scroll-behavior:smooth; }
+
+:root{
+  --heroA:#071c36;
+  --heroB:#0b3b7a;
+  --light:#eef6ff;          /* your “grey” but light-blue */
+  --grid:rgba(255,255,255,.085);
+
+  --fadePx:40px;            /* small fade (30–60px is good) */
+  --gridDissolvePx:130px;   /* how far from bottom grid fades out */
 }
 
-body {
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-  background: #eef6ff;
-  color: #0b1a2a;
+body{
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  background: var(--light);
+  color:#0b1a2a;
 }
 
-/* ===== HERO ===== */
-.hero {
-  position: relative;
-  min-height: 88vh;
-  background: linear-gradient(135deg, #071c36 0%, #0b3b7a 100%);
-  border-bottom-left-radius: 48px;
-  border-bottom-right-radius: 48px;
-  overflow: hidden;
+.container{
+  width:min(1120px, calc(100% - 48px));
+  margin-inline:auto;
 }
 
-/* Blueprint grid */
-.hero::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background-image:
-    linear-gradient(rgba(255,255,255,0.07) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,255,255,0.07) 1px, transparent 1px);
-  background-size: 40px 40px;
-  pointer-events: none;
-  z-index: 0;
+/* =====================================================
+   NAV
+   ===================================================== */
+.topbar{
+  position:sticky;
+  top:0;
+  z-index:50;
+  background:rgba(245,248,255,.9);
+  backdrop-filter: blur(8px);
+  border-bottom:1px solid rgba(10,30,80,.08);
+}
+.nav{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:14px 0;
+}
+.brand{ font-weight:700; }
+.navlinks a{
+  margin-left:18px;
+  text-decoration:none;
+  color:#1a2b3c;
+  font-weight:600;
+  opacity:.8;
+}
+.navlinks a:hover{ opacity:1; }
+
+/* =====================================================
+   HERO
+   ===================================================== */
+.hero{
+  position:relative;
+  padding:80px 0 96px;
+  overflow:hidden;
+  color:#fff;
+  background: linear-gradient(135deg, var(--heroA) 0%, var(--heroB) 100%);
 }
 
-/* Content */
-.hero * {
-  position: relative;
-  z-index: 2;
+/* Blueprint grid (with dissolve near bottom) */
+.hero::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  z-index:0;
+
+  background:
+    linear-gradient(var(--grid) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+  background-size:40px 40px;
+
+  /* Fade the grid OUT near the bottom so it doesn't hard-cut */
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    rgba(0,0,0,1) 0%,
+    rgba(0,0,0,1) calc(100% - var(--gridDissolvePx)),
+    rgba(0,0,0,0) 100%
+  );
+  mask-image: linear-gradient(
+    to bottom,
+    rgba(0,0,0,1) 0%,
+    rgba(0,0,0,1) calc(100% - var(--gridDissolvePx)),
+    rgba(0,0,0,0) 100%
+  );
 }
 
-/* ===== SECTIONS ===== */
-.section {
-  background: #eef6ff;
-  margin-top: -32px;
-  padding: 110px 0 90px;
+/* Small, subtle fade into the next section color */
+.hero::after{
+  content:"";
+  position:absolute;
+  left:0; right:0; bottom:0;
+  height: var(--fadePx);
+  pointer-events:none;
+  z-index:1;
+  background: linear-gradient(
+    to bottom,
+    rgba(238,246,255,0) 0%,
+    rgba(238,246,255,1) 100%
+  );
+}
+
+/* Keep content above visuals */
+.hero .container{ position:relative; z-index:2; }
+
+/* Hero layout */
+.heroGrid{
+  display:grid;
+  grid-template-columns: 1.1fr .9fr;
+  gap:48px;
+  align-items:center;
+}
+@media (max-width:900px){
+  .heroGrid{ grid-template-columns:1fr; }
+}
+
+/* Text */
+.hero h1{
+  font-size: clamp(42px, 4.6vw, 60px);
+  line-height:1.05;
+  margin-bottom:10px;
+}
+.subtitle{
+  font-weight:700;
+  margin-bottom:16px;
+  opacity:.95;
+}
+.bodyText{
+  max-width:52ch;
+  line-height:1.65;
+  opacity:.9;
+}
+.caption{
+  margin-top:12px;
+  font-style:italic;
+  opacity:.75;
+}
+
+/* Buttons */
+.ctaRow{
+  display:flex;
+  gap:14px;
+  margin:22px 0 16px;
+  flex-wrap:wrap;
+}
+.btn{
+  padding:10px 18px;
+  border-radius:12px;
+  font-weight:700;
+  text-decoration:none;
+}
+.btnPrimary{ background:#fff; color:#07214a; }
+.btnGhost{ border:1px solid rgba(255,255,255,.35); color:#fff; }
+
+/* Pills */
+.pills{ display:flex; gap:12px; flex-wrap:wrap; }
+.pill{
+  padding:8px 12px;
+  border-radius:999px;
+  background:rgba(255,255,255,.12);
+  font-weight:700;
+  font-size:.85rem;
+}
+
+/* Image placeholder */
+.heroCard{
+  width:min(420px,100%);
+  border-radius:22px;
+  background:rgba(255,255,255,.08);
+  border:1px solid rgba(255,255,255,.14);
+  padding:24px;
+}
+.heroImg{
+  width:70%;
+  aspect-ratio:1 / 1;
+  margin:auto;
+  border-radius:18px;
+  border:1px solid rgba(255,255,255,.18);
+  background:
+    repeating-linear-gradient(
+      45deg,
+      rgba(255,255,255,.12) 0px,
+      rgba(255,255,255,.12) 10px,
+      rgba(255,255,255,.04) 10px,
+      rgba(255,255,255,.04) 20px
+    );
+}
+
+/* =====================================================
+   SECTIONS BELOW HERO
+   ===================================================== */
+.section{
+  padding:64px 0;
+  background: var(--light); /* must match hero fade target */
+}
+h2{ margin-bottom:8px; font-size:32px; }
+.lead{ margin-bottom:20px; color:#4b5f76; }
+
+/* Footer */
+.footer{
+  padding:28px 0;
+  text-align:center;
+  color:#5b6f86;
+  background: var(--light);
+  border-top:1px solid rgba(10,30,80,.08);
 }
