@@ -1,181 +1,400 @@
-/* ===============================
-   GLOBAL VARIABLES
-================================ */
+/* =========================
+   THEME.CSS (full)
+   ========================= */
+
 :root{
-  --blue-dark: #061a3a;
-  --blue-mid: #0b4ea2;
-  --blue-light: #e9f2fb;
-  --blue-grid: rgba(255,255,255,0.06);
-  --white-line: rgba(255,255,255,0.7);
+  --bg-hero-1:#071a3a;
+  --bg-hero-2:#0a3a8a;
+  --bg-soft:#eef6ff;        /* very light blue (not gray) */
+  --ink:#0b1220;
+  --ink-soft:#42566b;
+  --white:#ffffff;
+
+  --radius-xl:22px;
+  --radius-lg:16px;
+  --radius-md:12px;
+
+  --shadow: 0 18px 45px rgba(0,0,0,.25);
+  --line: rgba(255,255,255,.85);
 }
 
-/* ===============================
-   HERO SECTION
-================================ */
+/* Reset-ish */
+*{ box-sizing:border-box; }
+html{ scroll-behavior:smooth; }
+body{
+  margin:0;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  color:var(--ink);
+  background: var(--bg-soft);
+}
+
+/* Layout */
+.container{
+  width:min(1120px, calc(100% - 48px));
+  margin-inline:auto;
+}
+
+/* =========================
+   TOP BAR
+   ========================= */
+.topbar{
+  position:sticky;
+  top:0;
+  z-index:50;
+  background:rgba(245,248,255,.92);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(10,30,80,.08);
+}
+
+.nav{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding: 14px 0;
+}
+
+.brand{
+  font-weight:700;
+  letter-spacing:.2px;
+}
+
+.navlinks a{
+  color: var(--ink);
+  text-decoration:none;
+  margin-left: 18px;
+  font-weight:600;
+  opacity:.75;
+}
+.navlinks a:hover{ opacity:1; }
+
+/* =========================
+   HERO
+   ========================= */
 .hero{
-  position: relative;
-  padding: 110px 0 90px;
+  position:relative;
+  overflow:hidden;
+  padding: 72px 0 96px; /* normal hero height */
+  color: var(--white);
+
+  /* base gradient */
   background:
-    linear-gradient(to right, rgba(0,0,0,.25), rgba(0,0,0,0)),
-    linear-gradient(to bottom, var(--blue-dark), var(--blue-mid));
-  overflow: hidden;
+    radial-gradient(1200px 500px at 12% 10%, rgba(255,255,255,.10), rgba(255,255,255,0) 55%),
+    linear-gradient(90deg, var(--bg-hero-1), var(--bg-hero-2));
+
+  /* blueprint grid overlay */
+  background-blend-mode: screen, normal;
 }
 
-/* Blueprint grid overlay */
+/* Blueprint grid (separate layer so it stays consistent) */
 .hero::before{
   content:"";
   position:absolute;
   inset:0;
-  background-image:
-    linear-gradient(var(--blue-grid) 1px, transparent 1px),
-    linear-gradient(90deg, var(--blue-grid) 1px, transparent 1px);
-  background-size: 40px 40px;
   pointer-events:none;
+  opacity:.38; /* ~40% blueprint feel */
+  background-image:
+    linear-gradient(rgba(255,255,255,.07) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.07) 1px, transparent 1px);
+  background-size: 44px 44px;
+  z-index:0;
 }
 
-/* ===============================
-   HERO CONTENT GRID
-================================ */
-.heroGrid{
-  display:grid;
-  grid-template-columns: 1.1fr 0.9fr;
-  gap:80px;
-  align-items:center;
-  position:relative;
-  z-index:2;
-}
-
-.hero h1{
-  font-size:3.2rem;
-  margin-bottom:10px;
-}
-
-.subtitle{
-  font-weight:600;
-  opacity:.95;
-  margin-bottom:18px;
-}
-
-.bodyText{
-  max-width:520px;
-  opacity:.95;
-}
-
-/* ===============================
-   IMAGE CARD
-================================ */
-.heroCard{
-  position:relative;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-}
-
-/* Outer glass frame */
-.heroCard::before{
-  content:"";
-  position:absolute;
-  width:360px;
-  height:360px;
-  border-radius:24px;
-  background:rgba(255,255,255,0.06);
-  backdrop-filter: blur(4px);
-}
-
-/* Inner square image placeholder */
-.heroImg{
-  width:260px;
-  height:260px;
-  border-radius:18px;
-  background:
-    repeating-linear-gradient(
-      45deg,
-      rgba(255,255,255,.12),
-      rgba(255,255,255,.12) 10px,
-      rgba(255,255,255,.05) 10px,
-      rgba(255,255,255,.05) 20px
-    );
-  z-index:1;
-}
-
-/* ===============================
-   BLUEPRINT CORNER LINES
-================================ */
+/* Blend to the light-blue section (ONLY at bottom; won’t cover text) */
 .hero::after{
   content:"";
   position:absolute;
-  right:60px;
-  bottom:120px;
-  width:120px;
-  height:120px;
-  border-right:2px solid var(--white-line);
-  border-bottom:2px solid var(--white-line);
-}
-
-.hero .cornerLeft{
-  position:absolute;
-  left:60px;
-  top:140px;
-  width:120px;
-  height:120px;
-  border-left:2px solid var(--white-line);
-  border-top:2px solid var(--white-line);
-}
-
-/* ===============================
-   HERO → PROJECTS FADE
-================================ */
-.heroFade{
-  height:140px;
+  left:0; right:0;
+  bottom:-1px;
+  height: 190px;              /* controls “how tall” the blend is */
+  pointer-events:none;
+  z-index:1;
   background: linear-gradient(
     to bottom,
-    rgba(6,26,58,0) 0%,
-    rgba(11,78,162,.45) 30%,
-    rgba(210,228,248,.65) 70%,
-    var(--blue-light) 100%
+    rgba(0,0,0,0) 0%,
+    rgba(0,0,0,0) 35%,
+    rgba(238,246,255,.55) 65%,
+    rgba(238,246,255,1) 100%
   );
 }
 
-/* ===============================
-   BUTTONS & PILLS
-================================ */
-.btn{
-  display:inline-block;
-  padding:12px 20px;
-  border-radius:12px;
-  font-weight:600;
-  transition:.2s ease;
+/* Keep all hero content above overlays */
+.hero .container{ position:relative; z-index:2; }
+
+.heroGrid{
+  display:grid;
+  grid-template-columns: 1.1fr .9fr;
+  gap: 42px;
+  align-items:center;
 }
+
+@media (max-width: 920px){
+  .heroGrid{ grid-template-columns: 1fr; }
+}
+
+.heroText h1{
+  margin:0 0 10px;
+  font-size: clamp(44px, 4.8vw, 64px);
+  line-height:1.02;
+  letter-spacing:-.8px;
+}
+
+.subtitle{
+  margin:0 0 18px;
+  font-size: 18px;
+  font-weight:700;
+  opacity:.95;
+}
+
+.bodyText{
+  margin:0 0 14px;
+  max-width: 52ch;
+  line-height:1.7;
+  opacity:.92;
+}
+
+.caption{
+  margin: 10px 0 22px;
+  font-style: italic;
+  opacity:.80;
+}
+
+/* CTA buttons */
+.ctaRow{
+  display:flex;
+  gap: 14px;
+  flex-wrap:wrap;
+  margin-bottom: 16px;
+}
+.btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  padding: 11px 18px;
+  border-radius: 12px;
+  font-weight: 800;
+  text-decoration:none;
+  transition: transform .18s ease, filter .18s ease, background .18s ease;
+  will-change: transform;
+}
+.btn:hover{ transform: translateY(-1px); filter: brightness(1.05); }
 
 .btnPrimary{
-  background:white;
-  color:#0b4ea2;
+  background: rgba(255,255,255,.95);
+  color:#07214a;
+  box-shadow: 0 12px 30px rgba(0,0,0,.18);
 }
-
-.btnPrimary:hover{
-  transform:translateY(-1px);
-}
-
 .btnGhost{
-  border:1px solid rgba(255,255,255,.35);
+  background: rgba(255,255,255,.08);
+  color: rgba(255,255,255,.92);
+  border: 1px solid rgba(255,255,255,.22);
 }
 
+/* Pills */
 .pills{
   display:flex;
-  gap:10px;
-  margin-top:22px;
+  gap: 12px;
+  flex-wrap:wrap;
 }
-
 .pill{
-  padding:8px 14px;
-  border-radius:999px;
-  background:rgba(255,255,255,.12);
-  font-size:.85rem;
+  padding: 9px 12px;
+  border-radius: 999px;
+  background: rgba(255,255,255,.09);
+  border: 1px solid rgba(255,255,255,.16);
+  font-weight: 700;
+  opacity:.95;
 }
 
-/* ===============================
-   PROJECTS SECTION BACKGROUND
-================================ */
+/* Image placeholder card (smaller by ~30%) */
+.heroCard{
+  justify-self:end;
+  width: min(440px, 100%);
+  border-radius: var(--radius-xl);
+  background: rgba(255,255,255,.08);
+  border: 1px solid rgba(255,255,255,.14);
+  box-shadow: var(--shadow);
+  padding: 26px;
+  position:relative;
+}
+
+/* inner square placeholder */
+.heroImg{
+  width: 72%;                 /* smaller */
+  aspect-ratio: 1 / 1;        /* square */
+  margin: 0 auto;
+  border-radius: 18px;
+  border: 1px solid rgba(255,255,255,.18);
+  background:
+    linear-gradient(135deg, rgba(255,255,255,.12), rgba(255,255,255,.05)),
+    repeating-linear-gradient(
+      45deg,
+      rgba(255,255,255,.12) 0px,
+      rgba(255,255,255,.12) 10px,
+      rgba(255,255,255,.04) 10px,
+      rgba(255,255,255,.04) 20px
+    );
+  opacity:.9;
+}
+
+/* =========================
+   CORNER “L” LINES (no overlap)
+   ========================= */
+.corner{
+  position:absolute;
+  width: 140px;
+  height: 140px;
+  pointer-events:none;
+  opacity:.9;
+  z-index:2;
+  filter: drop-shadow(0 6px 12px rgba(0,0,0,.25));
+}
+
+/* Top-left corner line */
+.cornerLeft{
+  left: 32px;
+  top: 84px; /* below navbar area */
+  border-left: 2px solid var(--line);
+  border-top: 2px solid var(--line);
+}
+
+/* Bottom-right corner line (kept away from heroCard + content) */
+.cornerRight{
+  right: 34px;
+  bottom: 38px;
+  border-right: 2px solid var(--line);
+  border-bottom: 2px solid var(--line);
+}
+
+/* On small screens, hide the right one so it never crowds content */
+@media (max-width: 920px){
+  .cornerRight{ display:none; }
+  .cornerLeft{ left:18px; }
+}
+
+/* =========================
+   SECTIONS (below hero)
+   ========================= */
 .section{
-  background:var(--blue-light);
+  padding: 64px 0;
+  background: transparent;
+}
+
+#projects{
+  /* keep a clean, light-blue background and subtle grid */
+  background:
+    linear-gradient(var(--bg-soft), var(--bg-soft)),
+    linear-gradient(rgba(10,60,140,.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(10,60,140,.06) 1px, transparent 1px);
+  background-size: auto, 56px 56px, 56px 56px;
+  background-blend-mode: normal, normal, normal;
+}
+
+h2{
+  margin:0 0 10px;
+  font-size: 34px;
+  letter-spacing:-.3px;
+}
+
+.lead{
+  margin:0 0 22px;
+  color: var(--ink-soft);
+}
+
+/* Project grid */
+.grid{
+  display:grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 18px;
+}
+
+@media (max-width: 1100px){
+  .grid{ grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 620px){
+  .grid{ grid-template-columns: 1fr; }
+}
+
+.card{
+  display:block;
+  text-decoration:none;
+  color: inherit;
+  background: rgba(255,255,255,.92);
+  border: 1px solid rgba(10,30,80,.10);
+  border-radius: var(--radius-xl);
+  overflow:hidden;
+  box-shadow: 0 14px 30px rgba(0,0,0,.08);
+  transition: transform .18s ease, box-shadow .18s ease;
+}
+.card:hover{
+  transform: translateY(-4px);
+  box-shadow: 0 18px 40px rgba(0,0,0,.12);
+}
+
+.thumb{
+  height: 140px;
+  background: linear-gradient(135deg, rgba(70,220,160,.55), rgba(70,220,160,.25));
+}
+
+.cardBody{ padding: 14px 14px 16px; }
+
+.badge{
+  display:inline-block;
+  padding: 6px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 800;
+  margin-bottom: 10px;
+}
+.badge.blue{ background: rgba(50,120,255,.12); color: #1f55d8; }
+.badge.green{ background: rgba(40,200,120,.14); color: #0e7a43; }
+.badge.red{ background: rgba(255,80,80,.12); color: #b32727; }
+
+.title{
+  font-weight: 900;
+  margin: 0 0 8px;
+  letter-spacing:-.2px;
+}
+
+.metaRow{
+  color: #50657a;
+  font-size: 13px;
+  margin-bottom: 10px;
+}
+
+.tagRow{
+  display:flex;
+  gap: 8px;
+  flex-wrap:wrap;
+  margin-bottom: 10px;
+}
+.tag{
+  font-size: 12px;
+  font-weight: 700;
+  padding: 6px 9px;
+  border-radius: 999px;
+  background: rgba(10,30,80,.06);
+  border: 1px solid rgba(10,30,80,.08);
+  color: #2b3f55;
+}
+
+.desc{
+  margin:0;
+  color: #3e5268;
+  line-height:1.55;
+}
+
+/* Resume/Contact panels */
+.panel{
+  background: rgba(255,255,255,.9);
+  border: 1px solid rgba(10,30,80,.10);
+  border-radius: var(--radius-xl);
+  padding: 18px;
+  box-shadow: 0 12px 26px rgba(0,0,0,.06);
+}
+
+/* Footer */
+.footer{
+  padding: 28px 0;
+  color: #526679;
+  background: var(--bg-soft);
+  border-top: 1px solid rgba(10,30,80,.08);
 }
