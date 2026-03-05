@@ -2,74 +2,154 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>2WD RC Car | Matthew Ahou</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Matthew Ahou | Portfolio</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
 
-  <!-- Go back one folder to access theme.css -->
-  <link rel="stylesheet" href="../theme.css">
+    body {
+      background: linear-gradient(to bottom, #ffffff, #f1e2da);
+      color: #333;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      padding: 20px 40px;
+    }
+
+    .hero {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 60px 80px;
+      background: transparent;
+    }
+
+    .hero-text h1 {
+      font-size: 48px;
+      margin-bottom: 15px;
+    }
+
+    .hero-text p {
+      max-width: 400px;
+      font-size: 16px;
+    }
+
+    .hero img {
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+
+    .section {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 80px;
+      background: linear-gradient(to bottom, rgba(231,183,165,0.4), rgba(255,255,255,0));
+    }
+
+    .section img {
+      width: 400px;
+      border-radius: 10px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    }
+
+    .section-text {
+      max-width: 400px;
+      text-align: center;
+    }
+
+    .section-text h2 {
+      font-size: 28px;
+      margin-bottom: 15px;
+    }
+
+    .section-text p {
+      margin-bottom: 20px;
+    }
+
+    .btn {
+      padding: 12px 25px;
+      background: #222;
+      color: white;
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-block;
+      transition: 0.3s;
+    }
+
+    .btn:hover {
+      background: #444;
+      transform: translateY(-2px);
+    }
+
+    footer {
+      text-align: center;
+      padding: 40px;
+      font-size: 14px;
+    }
+
+    @media (max-width: 900px) {
+      .hero, .section {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .section img {
+        margin-bottom: 20px;
+      }
+    }
+  </style>
 </head>
 <body>
 
-  <!-- NAV -->
-  <div class="topbar">
-    <div class="container">
-      <div class="nav">
-        <div class="brand">Matthew Ahou</div>
-        <div class="navlinks">
-          <a href="../index.html#projects">Projects</a>
-          <a href="../index.html#resume">Resume</a>
-          <a href="../index.html#contact">Contact</a>
-        </div>
-      </div>
-    </div>
+<header>
+  <div>Matthew Ahou</div>
+  <div>Menu</div>
+</header>
+
+<section class="hero">
+  <div class="hero-text">
+    <h1>Hi, I'm Matthew</h1>
+    <p>I'm a sophomore Mechanical Engineering student enthusiastic about 3D modeling and prototyping all things engineering.</p>
   </div>
+  <!-- MAKE SURE profile.jpg is in the same folder as this file -->
+  <img src="profile.jpg" alt="Profile">
+</section>
 
-  <!-- PROJECT CONTENT -->
-  <section class="section">
-    <div class="container">
-
-      <h1>2WD RC Car — First Model</h1>
-      <p class="lead">
-        Personal electromechanical project focused on design, control systems, and testing.
-      </p>
-
-      <div class="panel" style="margin-top:32px;">
-        <h3>Overview</h3>
-        <p>
-          This project involved the design and construction of a 2-wheel-drive RC car
-          capable of reaching approximately 20 km/h. The system integrates mechanical
-          design, electronics, and control logic.
-        </p>
-
-        <h3>Control System</h3>
-        <ul>
-          <li>FlySky transmitter and receiver</li>
-          <li>DC motor with electronic speed controller</li>
-          <li>Servo-based steering</li>
-          <li>PWM-based speed control</li>
-        </ul>
-
-        <h3>Tools & Skills</h3>
-        <ul>
-          <li>SolidWorks CAD</li>
-          <li>3D Printing</li>
-          <li>Electronics integration</li>
-          <li>Testing and iteration</li>
-        </ul>
-
-        <a class="btn btnPrimary" href="../index.html#projects" style="margin-top:24px;">
-          ← Back to Projects
-        </a>
-      </div>
-
-    </div>
-  </section>
-
-  <div class="footer">
-    <div class="container">
-      © 2025 Matthew Ahou
-    </div>
+<section class="section">
+  <!-- MAKE SURE arm-device.jpg is in the same folder -->
+  <img src="arm-device.jpg" alt="Assistive Arm">
+  <div class="section-text">
+    <h2>Assistive Arm Device</h2>
+    <p>The 'Assistive Arm Device' was my group's project in my freshman year class First-Year Engineering Design incorporating every stage of the engineering design process.</p>
+    <a href="arm.html" class="btn">View More</a>
   </div>
+</section>
+
+<section class="section">
+  <div class="section-text">
+    <h2>2WD RC Car</h2>
+    <p>The '2WD RC Car' was a personal project that I worked on in Summer 2025 which incorporated several skills including 3D modeling, 3D printing, prototyping, and integration of electrical components.</p>
+    <a href="rc-car.html" class="btn">View More</a>
+  </div>
+  <!-- MAKE SURE rc-car.jpg is in the same folder -->
+  <img src="rc-car.jpg" alt="RC Car">
+</section>
+
+<footer>
+  © Matthew Ahou 2026 | Bachelor of Mechanical Engineering
+</footer>
 
 </body>
 </html>
+
