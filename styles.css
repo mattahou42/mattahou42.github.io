@@ -1,21 +1,24 @@
-/* Reset and basic styles */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+:root {
+    --bg-gradient: linear-gradient(135deg, #fdf6e3, #f2cfae);
+    --card-bg: rgba(255, 255, 255, 0.85);
+    --text-color: #333;
+    --button-bg: #f2a86e;
+    --button-text: #fff;
+    --header-footer-bg: rgba(255, 255, 255, 0.7);
 }
 
 body {
     font-family: Arial, sans-serif;
     line-height: 1.6;
-    background: linear-gradient(135deg, #fdf6e3, #f2cfae); /* blended white & orange/beige */
-    color: #333;
+    background: var(--bg-gradient);
+    color: var(--text-color);
+    transition: all 0.3s ease;
 }
 
-header {
+header, footer {
     text-align: center;
     padding: 2rem 0;
-    background-color: rgba(255, 255, 255, 0.7);
+    background-color: var(--header-footer-bg);
     backdrop-filter: blur(5px);
 }
 
@@ -33,13 +36,13 @@ h1 {
 }
 
 .project-card {
-    background-color: rgba(255, 255, 255, 0.85);
+    background-color: var(--card-bg);
     padding: 1rem;
     border-radius: 15px;
     width: 300px;
     text-align: center;
     box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-    transition: transform 0.3s;
+    transition: transform 0.3s, background-color 0.3s;
 }
 
 .project-card:hover {
@@ -53,7 +56,6 @@ h1 {
     margin-bottom: 1rem;
 }
 
-/* Titles */
 .project-card h2 {
     margin-bottom: 0.5rem;
 }
@@ -65,26 +67,29 @@ h1 {
     margin: 2rem 0;
 }
 
-.load-more {
+.load-more, #theme-toggle {
     padding: 0.8rem 2rem;
     font-size: 1rem;
     border: none;
     border-radius: 10px;
-    background-color: #f2a86e;
-    color: white;
+    background-color: var(--button-bg);
+    color: var(--button-text);
     cursor: pointer;
-    transition: background-color 0.3s;
+    transition: background-color 0.3s, color 0.3s;
+    margin: 0.5rem;
 }
 
-.load-more:hover {
+.load-more:hover, #theme-toggle:hover {
     background-color: #e58950;
 }
 
-/* Footer */
-footer {
-    text-align: center;
-    padding: 1.5rem 0;
-    background-color: rgba(255, 255, 255, 0.7);
-    backdrop-filter: blur(5px);
-    margin-top: 2rem;
+/* Dark Theme */
+body.dark {
+    --bg-gradient: linear-gradient(135deg, #1e1e1e, #2c2c2c);
+    --card-bg: rgba(50, 50, 50, 0.85);
+    --text-color: #f0f0f0;
+    --button-bg: #ff8c42;
+    --button-text: #fff;
+    --header-footer-bg: rgba(40, 40, 40, 0.7);
 }
+
