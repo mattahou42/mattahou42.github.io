@@ -1,141 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <title>Filler Name | Engineering Portfolio</title>
-  <link rel="stylesheet" href="theme.css?v=1">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Engineering Portfolio</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <header>
+        <h1>My Engineering Portfolio</h1>
+    </header>
 
-  <!-- NAV -->
-  <div class="topbar">
-    <div class="container">
-      <div class="nav">
-        <div class="brand">Filler Name</div>
-        <div class="navlinks">
-          <a href="#projects">Projects</a>
-          <a href="#resume">Resume</a>
-          <a href="#contact">Contact</a>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- HERO -->
-  <section class="hero">
-    <div class="container">
-      <div class="heroGrid">
-        <div>
-          <h1>Matthew Ahou</h1>
-          <p class="subtitle">Sophmore Mechanical Engineering Student at Wentworth Institute of Technology</p>
-
-          <p class="bodyText">
-            Welcome to my portfolio! I am a sophmore mechanical engineering student at Wentworth Institute of Technology actively seeking an internship for
-             summer 2026. I've begun my journey with hands-on projects involving CAD, electromechanics, 3D printing and more.
-          </p>
-
-        
-
-          <div class="ctaRow">
-            <a class="btn btnPrimary" href="#projects">See Projects</a>
-            <a class="btn btnGhost" href="#resume">Download Resume</a>
-          </div>
-
-          <div class="pills">
-          </div>
-        </div>
-
-        <div class="heroCard">
-          <div class="heroImg" title="Image placeholder"></div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- PROJECTS (2 cards only) -->
-  <section class="section" id="projects">
-    <div class="container">
-      <h2>Featured Projects</h2>
-      <p class="lead">Click a card to view details.</p>
-
-      <div class="grid">
-        <a class="card" href="projects/rc-car.html">
-          <div class="thumb"></div>
-          <div class="cardBody">
-            <span class="badge blue">Personal Project</span>
-            <div class="title">2WD RC Car — 1st Model</div>
-            <div class="metaRow"><span>📅 20XX</span></div>
-            <div class="tagRow">
-              <span class="tag">CAD</span>
-              <span class="tag">Prototyping</span>
-              <span class="tag">Testing</span>
-              <span class="tag">3D Printing</span>
+    <main>
+        <section class="projects">
+            <div class="project-card">
+                <img src="images/rc_car_placeholder.png" alt="2WD RC Car Project">
+                <h2>2WD RC Car</h2>
+                <p>Brief description of the project goes here.</p>
             </div>
-            <p class="desc">2WD RC car capable of reaching 20km/h with rapid-response 
-              steering including mechanical design, electronics, and control systems
-            </p>
-          </div>
-        </a>
-
-        <a class="card" href="projects/project-2.html">
-          <div class="thumb"></div>
-          <div class="cardBody">
-            <span class="badge green">Class Project</span>
-            <div class="title">Project Title — Filler Subtitle</div>
-            <div class="metaRow"><span>📅 20XX</span></div>
-            <div class="tagRow">
-              <span class="tag">Analysis</span>
-              <span class="tag">SolidWorks</span>
-              <span class="tag">Iteration</span>
+            <div class="project-card">
+                <img src="images/assistive_arm_placeholder.png" alt="Assistive Arm Device">
+                <h2>Assistive Arm Device</h2>
+                <p>Brief description of the project goes here.</p>
             </div>
-            <p class="desc">Short filler description for the goal, constraints, and outcome.</p>
-          </div>
-        </a>
-      </div>
-    </div>
-  </section>
+        </section>
 
-  <!-- RESUME -->
-  <section class="section" id="resume">
-    <div class="container">
-      <h2>Resume</h2>
-      <p class="lead">View or download my resume below.</p>
+        <div class="load-more-container">
+            <button class="load-more">Load More</button>
+        </div>
+    </main>
 
-      <div class="resumeViewer">
-        <iframe 
-          src="Matthew%20Ahou%20Resume%20.pdf"
-          title="Resume PDF"
-          loading="lazy">
-        </iframe>
-
-      </div>
-
-      <p style="margin-top:14px;">
-        <a class="btn btnPrimary" href="Matthew%20Ahou%20Resume%20.pdf" download>
-          Download Resume (PDF)
-        </a>
-      </p>
-    </div>
-  </section>
-
-
-  <!-- CONTACT -->
-  <section class="section" id="contact">
-    <div class="container">
-      <h2>Contact</h2>
-      <p class="lead">Feel free to contact me anytime!</p>
-      <div class="panel">
-        <p><strong>Email:</strong> ahoum@wit.edu</p>
-        <p><strong>Phone Number:</strong> 617-487-2005</p>
-        <p><strong>LinkedIn:</strong> www.linkedin.com/in/matthew-ahou-a22bb7315/</p>
-      </div>
-    </div>
-  </section>
-
-  <div class="footer">
-    <div class="container">© 2025 Matthew Ahou — Built with GitHub Pages</div>
-  </div>
-
+    <footer>
+        <p>&copy; 2026 My Name. All Rights Reserved.</p>
+    </footer>
 </body>
 </html>
